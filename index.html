@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ვაკანსიები - Job Portal</title>
+    <!-- 
+    ADMIN PANEL ACCESS:
+    To access admin panel, add #admin to the URL: file:///path/to/job-portal.html#admin
+    Default password: admin2025
+    TO CHANGE PASSWORD: Search for "const ADMIN_PASSWORD" in this file and change the value
+    -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #7C3AED;
+            --primary-dark: #5B21B6;
+            --primary-light: #A78BFA;
+            --accent: #C084FC;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --bg: #FFFFFF;
+            --bg-subtle: #F9FAFB;
+            --border: #E5E7EB;
+            --shadow: rgba(124, 58, 237, 0.1);
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .jobs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .job-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .job-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px var(--shadow);
+            border-color: var(--primary-light);
+        }
+
+        .job-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            background: var(--bg-subtle);
+            flex-shrink: 0;
+        }
+
+        .job-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .job-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .company-name {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .job-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .days-ago {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .deadline {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .deadline.urgent {
+            color: #DC2626;
+            font-weight: 500;
+        }
+
+        .deadline-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        .job-detail {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .detail-header {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-company {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            background: white;
+        }
+
+        .detail-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .detail-content {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .description-text {
+            color: var(--text-light);
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .contact-info {
+            background: var(--bg-subtle);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Work Sans', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .recruiters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .recruiter-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .recruiter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+        }
+
+        .recruiter-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .recruiter-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .recruiter-bio {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .linkedin-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .linkedin-link:hover {
+            text-decoration: underline;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-table th {
+            background: var(--bg-subtle);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-success {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #EF4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-approved {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-light);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-light);
+        }
+
+        .filters-container {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .filter-select,
+        .filter-input {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Work Sans', sans-serif;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .filter-select:focus,
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .clear-filters {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 0.95rem;
+            align-self: flex-end;
+        }
+
+        .clear-filters:hover {
+            background: var(--bg-subtle);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .admin-login {
+            max-width: 400px;
+            margin: 4rem auto;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .admin-login h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .admin-login p {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Work Sans', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .error {
+            background: #FEE2E2;
+            color: #991B1B;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .success {
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .jobs-grid {
+                gap: 0.75rem;
+            }
+
+            .job-card {
+                padding: 1rem;
+            }
+
+            .company-logo {
+                width: 44px;
+                height: 44px;
+            }
+
+            .job-title {
+                font-size: 0.95rem;
+            }
+
+            .company-name {
+                font-size: 0.8rem;
+            }
+
+            .days-ago {
+                font-size: 0.75rem;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .clear-filters {
+                align-self: stretch;
+            }
+
+            .recruiters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .detail-header {
+                padding: 2rem;
+            }
+
+            .detail-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createClient } = supabase;
+
+        // Initialize Supabase
+        const supabaseUrl = 'https://tpywljiizpthimygcjoo.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRweXdsamlpenB0aGlteWdjam9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3NDYwNjAsImV4cCI6MjA4NDMyMjA2MH0.cSM-SYpqbyL-W3sXXBq_4Pq8QcGUPXEDlnX1I6yw1b4';
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+        // Navigation Component
+        function Navigation({ currentPage, setCurrentPage }) {
+            return (
+                <header className="header">
+                    <nav className="nav-container">
+                        <a href="#" className="logo" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>
+                            ვაკანსიები
+                        </a>
+                        <div className="nav-links">
+                            <a 
+                                href="#" 
+                                className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+                                onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
+                            >
+                                ვაკანსიები
+                            </a>
+                            <a 
+                                href="#" 
+                                className={`nav-link ${currentPage === 'recruiters' ? 'active' : ''}`}
+                                onClick={(e) => { e.preventDefault(); setCurrentPage('recruiters'); }}
+                            >
+                                რეკრუტერები
+                            </a>
+                            <a 
+                                href="#" 
+                                className={`nav-link ${currentPage === 'post-job' ? 'active' : ''}`}
+                                onClick={(e) => { e.preventDefault(); setCurrentPage('post-job'); }}
+                            >
+                                ვაკანსიის დამატება
+                            </a>
+                        </div>
+                    </nav>
+                </header>
+            );
+        }
+
+        // Job Card Component
+        function JobCard({ job, onClick }) {
+            const createdDate = new Date(job.created_at);
+            const today = new Date();
+            const daysAgo = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
+            
+            let timeText;
+            if (daysAgo === 0) {
+                timeText = 'დღეს';
+            } else if (daysAgo === 1) {
+                timeText = 'გუშინ';
+            } else if (daysAgo < 7) {
+                timeText = `${daysAgo} დღის წინ`;
+            } else if (daysAgo < 30) {
+                const weeksAgo = Math.floor(daysAgo / 7);
+                timeText = `${weeksAgo} კვირის წინ`;
+            } else {
+                const monthsAgo = Math.floor(daysAgo / 30);
+                timeText = `${monthsAgo} თვის წინ`;
+            }
+
+            return (
+                <div className="job-card" onClick={onClick}>
+                    <div className="job-header">
+                        <img 
+                            src={job.logo_url || 'https://via.placeholder.com/50'} 
+                            alt={job.company_name}
+                            className="company-logo"
+                        />
+                        <div className="job-info">
+                            <h3 className="job-title">{job.title}</h3>
+                            <p className="company-name">{job.company_name}</p>
+                        </div>
+                    </div>
+                    <div className="job-footer">
+                        <span className="days-ago">{timeText}</span>
+                    </div>
+                </div>
+            );
+        }
+
+        // Home Page Component
+        function HomePage({ setCurrentPage, setSelectedJob }) {
+            const [jobs, setJobs] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [filters, setFilters] = useState({
+                search: '',
+                company: ''
+            });
+            const [companies, setCompanies] = useState([]);
+
+            useEffect(() => {
+                loadJobs();
+            }, []);
+
+            async function loadJobs() {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('vacancies')
+                        .select('*')
+                        .eq('is_approved', true)
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+                    setJobs(data || []);
+                    
+                    // Extract unique companies
+                    const uniqueCompanies = [...new Set((data || []).map(job => job.company_name))];
+                    setCompanies(uniqueCompanies.sort());
+                } catch (error) {
+                    console.error('Error loading jobs:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            function handleJobClick(job) {
+                setSelectedJob(job);
+                setCurrentPage('job-detail');
+            }
+
+            function handleFilterChange(field, value) {
+                setFilters({
+                    ...filters,
+                    [field]: value
+                });
+            }
+
+            function clearFilters() {
+                setFilters({
+                    search: '',
+                    company: ''
+                });
+            }
+
+            // Filter jobs based on current filters
+            const filteredJobs = jobs.filter(job => {
+                // Search filter
+                if (filters.search) {
+                    const searchLower = filters.search.toLowerCase();
+                    const matchesSearch = 
+                        job.title.toLowerCase().includes(searchLower) ||
+                        job.company_name.toLowerCase().includes(searchLower) ||
+                        job.description.toLowerCase().includes(searchLower);
+                    if (!matchesSearch) return false;
+                }
+
+                // Company filter
+                if (filters.company && job.company_name !== filters.company) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            if (loading) {
+                return (
+                    <div className="container">
+                        <div className="loading">იტვირთება...</div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container">
+                    <div className="page-header">
+                        <h1 className="page-title">ვაკანსიები</h1>
+                        <p className="page-subtitle">იპოვე შენთვის სასურველი სამუშაო</p>
+                    </div>
+
+                    {/* Filters Section */}
+                    <div className="filters-container">
+                        <div className="filters-grid">
+                            <div className="filter-group">
+                                <label className="filter-label">ძებნა</label>
+                                <input 
+                                    type="text"
+                                    className="filter-input"
+                                    placeholder="პოზიცია, კომპანია..."
+                                    value={filters.search}
+                                    onChange={(e) => handleFilterChange('search', e.target.value)}
+                                />
+                            </div>
+                            <div className="filter-group">
+                                <label className="filter-label">კომპანია</label>
+                                <select 
+                                    className="filter-select"
+                                    value={filters.company}
+                                    onChange={(e) => handleFilterChange('company', e.target.value)}
+                                >
+                                    <option value="">ყველა კომპანია</option>
+                                    {companies.map(company => (
+                                        <option key={company} value={company}>{company}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <button className="clear-filters" onClick={clearFilters}>
+                                გასუფთავება
+                            </button>
+                        </div>
+                    </div>
+
+                    {filteredJobs.length === 0 ? (
+                        <div className="empty-state">
+                            <div className="empty-icon">🔍</div>
+                            <h3>ვაკანსიები არ მოიძებნა</h3>
+                            <p>სცადეთ სხვა ფილტრები</p>
+                        </div>
+                    ) : (
+                        <>
+                            <p style={{color: 'var(--text-light)', marginBottom: '1.5rem'}}>
+                                ნაპოვნია {filteredJobs.length} ვაკანსია
+                            </p>
+                            <div className="jobs-grid">
+                                {filteredJobs.map(job => (
+                                    <JobCard 
+                                        key={job.id} 
+                                        job={job} 
+                                        onClick={() => handleJobClick(job)}
+                                    />
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
+            );
+        }
+
+        // Job Detail Page Component
+        function JobDetailPage({ job, setCurrentPage }) {
+            const deadline = new Date(job.deadline);
+
+            return (
+                <div className="container">
+                    <div className="job-detail">
+                        <button 
+                            className="btn btn-secondary" 
+                            onClick={() => setCurrentPage('home')}
+                            style={{marginBottom: '2rem'}}
+                        >
+                            ← უკან
+                        </button>
+                        <div className="detail-header">
+                            <div className="detail-company">
+                                <img 
+                                    src={job.logo_url || 'https://via.placeholder.com/80'} 
+                                    alt={job.company_name}
+                                    className="detail-logo"
+                                />
+                                <div>
+                                    <h1 className="detail-title">{job.title}</h1>
+                                    <p className="company-name" style={{fontSize: '1.1rem'}}>{job.company_name}</p>
+                                </div>
+                            </div>
+                            <div className="detail-meta">
+                                <div className="meta-item">
+                                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd"/>
+                                    </svg>
+                                    <strong>ბოლო ვადა:</strong> {deadline.toLocaleDateString('ka-GE')}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="detail-content">
+                            <div className="section-title">აღწერა</div>
+                            <div className="description-text">{job.description}</div>
+                            
+                            <div className="contact-info">
+                                <div className="section-title" style={{fontSize: '1.2rem', marginBottom: '0.75rem'}}>
+                                    საკონტაქტო ინფორმაცია
+                                </div>
+                                <div className="description-text">{job.contact_info}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Recruiters Page Component
+        function RecruitersPage({ setCurrentPage }) {
+            const [recruiters, setRecruiters] = useState([]);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => {
+                loadRecruiters();
+            }, []);
+
+            async function loadRecruiters() {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('recruiters')
+                        .select('*')
+                        .eq('is_approved', true)
+                        .order('full_name');
+
+                    if (error) throw error;
+                    setRecruiters(data || []);
+                } catch (error) {
+                    console.error('Error loading recruiters:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            if (loading) {
+                return (
+                    <div className="container">
+                        <div className="loading">იტვირთება...</div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container">
+                    <div className="page-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem'}}>
+                        <div>
+                            <h1 className="page-title">რეკრუტერები</h1>
+                            <p className="page-subtitle">ჩვენი პროფესიონალი რეკრუტერები</p>
+                        </div>
+                        <button 
+                            className="btn btn-primary"
+                            onClick={() => setCurrentPage('register-recruiter')}
+                        >
+                            გახდი რეკრუტერი
+                        </button>
+                    </div>
+                    {recruiters.length === 0 ? (
+                        <div className="empty-state">
+                            <div className="empty-icon">👥</div>
+                            <h3>რეკრუტერები არ არის</h3>
+                            <p>ამჟამად რეკრუტერები არ არიან დარეგისტრირებული</p>
+                        </div>
+                    ) : (
+                        <div className="recruiters-grid">
+                            {recruiters.map(recruiter => (
+                                <div key={recruiter.id} className="recruiter-card">
+                                    <div className="recruiter-avatar">
+                                        {recruiter.full_name.charAt(0)}
+                                    </div>
+                                    <h3 className="recruiter-name">{recruiter.full_name}</h3>
+                                    <p className="recruiter-bio">{recruiter.bio}</p>
+                                    {recruiter.linkedin_url && (
+                                        <a 
+                                            href={recruiter.linkedin_url} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="linkedin-link"
+                                        >
+                                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                            </svg>
+                                            LinkedIn
+                                        </a>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Register Recruiter Page Component
+        function RegisterRecruiterPage() {
+            const [formData, setFormData] = useState({
+                full_name: '',
+                bio: '',
+                linkedin_url: ''
+            });
+            const [message, setMessage] = useState({ type: '', text: '' });
+            const [loading, setLoading] = useState(false);
+
+            function handleChange(e) {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            }
+
+            async function handleSubmit(e) {
+                e.preventDefault();
+                setLoading(true);
+                setMessage({ type: '', text: '' });
+
+                try {
+                    const { error } = await supabaseClient
+                        .from('recruiters')
+                        .insert([{
+                            ...formData,
+                            is_approved: false
+                        }]);
+
+                    if (error) throw error;
+
+                    setMessage({ 
+                        type: 'success', 
+                        text: 'რეგისტრაცია წარმატებით გაიგზავნა! ადმინისტრატორის დამტკიცების შემდეგ გამოჩნდებით რეკრუტერების სიაში.' 
+                    });
+                    setFormData({
+                        full_name: '',
+                        bio: '',
+                        linkedin_url: ''
+                    });
+                } catch (error) {
+                    setMessage({ type: 'error', text: 'შეცდომა: ' + error.message });
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            return (
+                <div className="container">
+                    <div className="page-header">
+                        <h1 className="page-title">გახდი რეკრუტერი</h1>
+                        <p className="page-subtitle">დარეგისტრირდი და შეუერთდი ჩვენს პროფესიონალ რეკრუტერებს</p>
+                    </div>
+                    <div className="form-container">
+                        {message.text && (
+                            <div className={message.type}>{message.text}</div>
+                        )}
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">სრული სახელი *</label>
+                                <input 
+                                    type="text" 
+                                    name="full_name"
+                                    className="form-input"
+                                    value={formData.full_name}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="მაგ: გიორგი ბერიძე"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">გთხოვთ, მოკლედ აღწეროთ თქვენი რეკრუტინგის გამოცდილება და ის მიმართულებები რომლებშიც არჩევთ კანდიდატებს *</label>
+                                <textarea 
+                                    name="bio"
+                                    className="form-textarea"
+                                    value={formData.bio}
+                                    onChange={handleChange}
+                                    required
+                                    placeholder="მაგ: 5 წლიანი გამოცდილება IT რეკრუტმენტში. სპეციალიზაცია: Software Developers, Data Scientists, DevOps Engineers..."
+                                    style={{minHeight: '120px'}}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">LinkedIn პროფილის ბმული</label>
+                                <input 
+                                    type="url" 
+                                    name="linkedin_url"
+                                    className="form-input"
+                                    value={formData.linkedin_url}
+                                    onChange={handleChange}
+                                    placeholder="https://linkedin.com/in/your-profile"
+                                />
+                                <small style={{color: 'var(--text-light)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block'}}>
+                                    ოფციონალური - მაგრამ რეკომენდებული პროფესიონალიზმისთვის
+                                </small>
+                            </div>
+                            <button 
+                                type="submit" 
+                                className="btn btn-primary btn-large"
+                                disabled={loading}
+                                style={{width: '100%'}}
+                            >
+                                {loading ? 'იგზავნება...' : 'რეგისტრაცია'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        // Post Job Page Component
+        function PostJobPage() {
+            const [formData, setFormData] = useState({
+                title: '',
+                company_name: '',
+                logo_url: '',
+                description: '',
+                contact_info: '',
+                deadline: ''
+            });
+            const [message, setMessage] = useState({ type: '', text: '' });
+            const [loading, setLoading] = useState(false);
+
+            function handleChange(e) {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            }
+
+            async function handleSubmit(e) {
+                e.preventDefault();
+                setLoading(true);
+                setMessage({ type: '', text: '' });
+
+                try {
+                    const { error } = await supabaseClient
+                        .from('vacancies')
+                        .insert([{
+                            ...formData,
+                            is_approved: false
+                        }]);
+
+                    if (error) throw error;
+
+                    setMessage({ 
+                        type: 'success', 
+                        text: 'ვაკანსია წარმატებით გაიგზავნა! ადმინისტრატორის დამტკიცების შემდეგ გამოჩნდება საიტზე.' 
+                    });
+                    setFormData({
+                        title: '',
+                        company_name: '',
+                        logo_url: '',
+                        description: '',
+                        contact_info: '',
+                        deadline: ''
+                    });
+                } catch (error) {
+                    setMessage({ type: 'error', text: 'შეცდომა: ' + error.message });
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            return (
+                <div className="container">
+                    <div className="page-header">
+                        <h1 className="page-title">ვაკანსიის დამატება</h1>
+                        <p className="page-subtitle">განათავსე შენი ვაკანსია</p>
+                    </div>
+                    <div className="form-container">
+                        {message.text && (
+                            <div className={message.type}>{message.text}</div>
+                        )}
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">პოზიციის დასახელება *</label>
+                                <input 
+                                    type="text" 
+                                    name="title"
+                                    className="form-input"
+                                    value={formData.title}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">კომპანიის სახელი *</label>
+                                <input 
+                                    type="text" 
+                                    name="company_name"
+                                    className="form-input"
+                                    value={formData.company_name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">ლოგოს URL</label>
+                                <input 
+                                    type="url" 
+                                    name="logo_url"
+                                    className="form-input"
+                                    value={formData.logo_url}
+                                    onChange={handleChange}
+                                    placeholder="https://example.com/logo.png"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">აღწერა *</label>
+                                <textarea 
+                                    name="description"
+                                    className="form-textarea"
+                                    value={formData.description}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">საკონტაქტო ინფორმაცია *</label>
+                                <textarea 
+                                    name="contact_info"
+                                    className="form-textarea"
+                                    value={formData.contact_info}
+                                    onChange={handleChange}
+                                    required
+                                    style={{minHeight: '100px'}}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">ბოლო ვადა *</label>
+                                <input 
+                                    type="date" 
+                                    name="deadline"
+                                    className="form-input"
+                                    value={formData.deadline}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <button 
+                                type="submit" 
+                                className="btn btn-primary btn-large"
+                                disabled={loading}
+                                style={{width: '100%'}}
+                            >
+                                {loading ? 'იგზავნება...' : 'გაგზავნა'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        // Admin Page Component
+        function AdminPage() {
+            const [vacancies, setVacancies] = useState([]);
+            const [recruiters, setRecruiters] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [isAuthenticated, setIsAuthenticated] = useState(false);
+            const [password, setPassword] = useState('');
+            const [error, setError] = useState('');
+
+            // Admin password - CHANGE THIS!
+            const ADMIN_PASSWORD = 'admin2025';
+
+            useEffect(() => {
+                // Check if already authenticated in session
+                const auth = sessionStorage.getItem('adminAuth');
+                if (auth === 'true') {
+                    setIsAuthenticated(true);
+                    loadData();
+                } else {
+                    setLoading(false);
+                }
+            }, []);
+
+            function handleLogin(e) {
+                e.preventDefault();
+                if (password === ADMIN_PASSWORD) {
+                    setIsAuthenticated(true);
+                    sessionStorage.setItem('adminAuth', 'true');
+                    setError('');
+                    loadData();
+                } else {
+                    setError('არასწორი პაროლი');
+                    setPassword('');
+                }
+            }
+
+            function handleLogout() {
+                setIsAuthenticated(false);
+                sessionStorage.removeItem('adminAuth');
+                setPassword('');
+            }
+
+            async function loadData() {
+                try {
+                    const [vacanciesRes, recruitersRes] = await Promise.all([
+                        supabaseClient.from('vacancies').select('*').order('created_at', { ascending: false }),
+                        supabaseClient.from('recruiters').select('*').order('full_name')
+                    ]);
+
+                    setVacancies(vacanciesRes.data || []);
+                    setRecruiters(recruitersRes.data || []);
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            async function approveVacancy(id) {
+                try {
+                    const { error } = await supabaseClient
+                        .from('vacancies')
+                        .update({ is_approved: true })
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
+            async function deleteVacancy(id) {
+                if (!confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?')) return;
+                
+                try {
+                    const { error } = await supabaseClient
+                        .from('vacancies')
+                        .delete()
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
+            async function approveRecruiter(id) {
+                try {
+                    const { error } = await supabaseClient
+                        .from('recruiters')
+                        .update({ is_approved: true })
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
+            async function deleteRecruiter(id) {
+                if (!confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?')) return;
+                
+                try {
+                    const { error } = await supabaseClient
+                        .from('recruiters')
+                        .delete()
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
+            // Login Screen
+            if (!isAuthenticated) {
+                return (
+                    <div className="container">
+                        <div className="admin-login">
+                            <h2>ადმინ პანელი</h2>
+                            <p>შეიყვანეთ პაროლი</p>
+                            {error && <div className="error">{error}</div>}
+                            <form onSubmit={handleLogin}>
+                                <input 
+                                    type="password"
+                                    className="password-input"
+                                    placeholder="პაროლი"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    autoFocus
+                                />
+                                <button type="submit" className="btn btn-primary btn-large" style={{width: '100%'}}>
+                                    შესვლა
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                );
+            }
+
+            if (loading) {
+                return (
+                    <div className="container">
+                        <div className="loading">იტვირთება...</div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container">
+                    <div className="page-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div>
+                            <h1 className="page-title">ადმინ პანელი</h1>
+                            <p className="page-subtitle">მართეთ ვაკანსიები და რეკრუტერები</p>
+                        </div>
+                        <button className="btn btn-secondary" onClick={handleLogout}>
+                            გასვლა
+                        </button>
+                    </div>
+
+                    <div style={{marginBottom: '3rem'}}>
+                        <h2 className="section-title">ვაკანსიები</h2>
+                        <table className="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>პოზიცია</th>
+                                    <th>კომპანია</th>
+                                    <th>ბოლო ვადა</th>
+                                    <th>სტატუსი</th>
+                                    <th>მოქმედება</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {vacancies.map(vacancy => (
+                                    <tr key={vacancy.id}>
+                                        <td>{vacancy.title}</td>
+                                        <td>{vacancy.company_name}</td>
+                                        <td>{new Date(vacancy.deadline).toLocaleDateString('ka-GE')}</td>
+                                        <td>
+                                            <span className={`status-badge ${vacancy.is_approved ? 'status-approved' : 'status-pending'}`}>
+                                                {vacancy.is_approved ? 'დამტკიცებული' : 'განხილვაში'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div className="admin-actions">
+                                                {!vacancy.is_approved && (
+                                                    <button 
+                                                        className="btn btn-success btn-small"
+                                                        onClick={() => approveVacancy(vacancy.id)}
+                                                    >
+                                                        დამტკიცება
+                                                    </button>
+                                                )}
+                                                <button 
+                                                    className="btn btn-danger btn-small"
+                                                    onClick={() => deleteVacancy(vacancy.id)}
+                                                >
+                                                    წაშლა
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h2 className="section-title">რეკრუტერები</h2>
+                        <table className="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>სახელი</th>
+                                    <th>ბიო</th>
+                                    <th>სტატუსი</th>
+                                    <th>მოქმედება</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {recruiters.map(recruiter => (
+                                    <tr key={recruiter.id}>
+                                        <td>{recruiter.full_name}</td>
+                                        <td>{recruiter.bio?.substring(0, 50)}...</td>
+                                        <td>
+                                            <span className={`status-badge ${recruiter.is_approved ? 'status-approved' : 'status-pending'}`}>
+                                                {recruiter.is_approved ? 'დამტკიცებული' : 'განხილვაში'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div className="admin-actions">
+                                                {!recruiter.is_approved && (
+                                                    <button 
+                                                        className="btn btn-success btn-small"
+                                                        onClick={() => approveRecruiter(recruiter.id)}
+                                                    >
+                                                        დამტკიცება
+                                                    </button>
+                                                )}
+                                                <button 
+                                                    className="btn btn-danger btn-small"
+                                                    onClick={() => deleteRecruiter(recruiter.id)}
+                                                >
+                                                    წაშლა
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        // Main App Component
+        function App() {
+            const [currentPage, setCurrentPage] = useState('home');
+            const [selectedJob, setSelectedJob] = useState(null);
+
+            // Handle URL hash navigation
+            useEffect(() => {
+                function handleHashChange() {
+                    const hash = window.location.hash.slice(1); // Remove #
+                    if (hash === 'admin') {
+                        setCurrentPage('admin');
+                    } else if (hash === 'recruiters') {
+                        setCurrentPage('recruiters');
+                    } else if (hash === 'post-job') {
+                        setCurrentPage('post-job');
+                    } else if (hash === 'home' || hash === '') {
+                        setCurrentPage('home');
+                    }
+                }
+
+                // Check initial hash
+                handleHashChange();
+
+                // Listen for hash changes
+                window.addEventListener('hashchange', handleHashChange);
+                
+                return () => window.removeEventListener('hashchange', handleHashChange);
+            }, []);
+
+            // Update URL hash when page changes
+            useEffect(() => {
+                if (currentPage !== 'job-detail') {
+                    window.location.hash = currentPage === 'home' ? '' : currentPage;
+                }
+            }, [currentPage]);
+
+            return (
+                <div>
+                    <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                    {currentPage === 'home' && (
+                        <HomePage 
+                            setCurrentPage={setCurrentPage} 
+                            setSelectedJob={setSelectedJob}
+                        />
+                    )}
+                    {currentPage === 'job-detail' && selectedJob && (
+                        <JobDetailPage job={selectedJob} setCurrentPage={setCurrentPage} />
+                    )}
+                    {currentPage === 'recruiters' && <RecruitersPage setCurrentPage={setCurrentPage} />}
+                    {currentPage === 'register-recruiter' && <RegisterRecruiterPage />}
+                    {currentPage === 'post-job' && <PostJobPage />}
+                    {currentPage === 'admin' && <AdminPage />}
+                </div>
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
