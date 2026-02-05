@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ვაკანსიები - Job Portal</title>
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ვაკანსიები">
+    <meta property="og:title" content="ვაკანსიები - იპოვე შენთვის სასურველი სამუშაო">
+    <meta property="og:description" content="პროფესიონალი რეკრუტერები და კარიერული მხარდაჭერა">
+    <meta property="og:image" content="https://tpywljiizpthimygcjoo.supabase.co/storage/v1/object/public/assets/logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ვაკანსიები - იპოვე შენთვის სასურველი სამუშაო">
+    <meta name="twitter:description" content="პროფესიონალი რეკრუტერები და კარიერული მხარდაჭერა">
+    <meta name="twitter:image" content="https://tpywljiizpthimygcjoo.supabase.co/storage/v1/object/public/assets/logo.png">
+    
     <!-- 
     ADMIN PANEL ACCESS:
     To access admin panel, add #admin to the URL: file:///path/to/job-portal.html#admin
@@ -29,10 +45,11 @@
             --accent: #C084FC;
             --text: #1F2937;
             --text-light: #6B7280;
-            --bg: #FFFFFF;
-            --bg-subtle: #F9FAFB;
+            --bg: #FAFAFA;
+            --bg-subtle: #F3F4F6;
             --border: #E5E7EB;
             --shadow: rgba(124, 58, 237, 0.1);
+            --card-bg: #FFFFFF;
         }
 
         body {
@@ -55,25 +72,103 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem 2rem;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             text-decoration: none;
-            letter-spacing: -0.5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .logo-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+            transition: all 0.3s;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 72px);
+                background: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-link {
+                width: 100%;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
         }
 
         .nav-link {
@@ -131,17 +226,18 @@
         }
 
         .job-card {
-            background: var(--bg);
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
+            border-radius: 16px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             overflow: hidden;
             display: flex;
-            gap: 1.25rem;
+            gap: 1.5rem;
             align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .job-card::before {
@@ -150,7 +246,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             transform: scaleX(0);
             transition: transform 0.3s ease;
@@ -161,8 +257,8 @@
         }
 
         .job-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px var(--shadow);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.12);
             border-color: var(--primary-light);
         }
 
@@ -220,6 +316,38 @@
             white-space: nowrap;
         }
 
+        .keywords-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .dates-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        .date-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
         .deadline {
             display: flex;
             align-items: center;
@@ -241,7 +369,7 @@
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 500;
             font-size: 0.95rem;
             cursor: pointer;
@@ -252,14 +380,14 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px var(--shadow);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
         }
 
         .btn-secondary {
@@ -284,11 +412,12 @@
         }
 
         .detail-header {
-            background: var(--bg-subtle);
+            background: linear-gradient(135deg, var(--bg-subtle), var(--card-bg));
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 3rem;
             margin-bottom: 3rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .detail-company {
@@ -330,10 +459,11 @@
         }
 
         .detail-content {
-            background: white;
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 20px;
             padding: 3rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .section-title {
@@ -351,9 +481,10 @@
 
         .contact-info {
             background: var(--bg-subtle);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 1.5rem;
             margin-top: 2rem;
+            border: 1px solid var(--border);
         }
 
         .form-container {
@@ -402,17 +533,19 @@
         }
 
         .recruiter-card {
-            background: var(--bg);
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .recruiter-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px var(--shadow);
+            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.12);
+            border-color: var(--primary-light);
         }
 
         .recruiter-avatar {
@@ -427,6 +560,13 @@
             font-size: 2rem;
             color: white;
             font-weight: 600;
+            overflow: hidden;
+        }
+
+        .recruiter-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .recruiter-name {
@@ -542,11 +682,12 @@
         }
 
         .filters-container {
-            background: var(--bg-subtle);
+            background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .filters-grid {
@@ -730,31 +871,48 @@
 
         // Navigation Component
         function Navigation({ currentPage, setCurrentPage }) {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            function handleNavClick(page) {
+                setCurrentPage(page);
+                setMobileMenuOpen(false);
+            }
+
             return (
                 <header className="header">
                     <nav className="nav-container">
-                        <a href="#" className="logo" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}>
-                            ვაკანსიები
+                        <a href="#" className="logo" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>
+                            <div className="logo-circle"></div>
                         </a>
-                        <div className="nav-links">
+                        
+                        <button 
+                            className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+
+                        <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
                             <a 
                                 href="#" 
                                 className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
-                                onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }}
+                                onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}
                             >
                                 ვაკანსიები
                             </a>
                             <a 
                                 href="#" 
                                 className={`nav-link ${currentPage === 'recruiters' ? 'active' : ''}`}
-                                onClick={(e) => { e.preventDefault(); setCurrentPage('recruiters'); }}
+                                onClick={(e) => { e.preventDefault(); handleNavClick('recruiters'); }}
                             >
                                 რეკრუტერები
                             </a>
                             <a 
                                 href="#" 
                                 className={`nav-link ${currentPage === 'post-job' ? 'active' : ''}`}
-                                onClick={(e) => { e.preventDefault(); setCurrentPage('post-job'); }}
+                                onClick={(e) => { e.preventDefault(); handleNavClick('post-job'); }}
                             >
                                 ვაკანსიის დამატება
                             </a>
@@ -766,24 +924,16 @@
 
         // Job Card Component
         function JobCard({ job, onClick }) {
-            const createdDate = new Date(job.created_at);
-            const today = new Date();
-            const daysAgo = Math.floor((today - createdDate) / (1000 * 60 * 60 * 24));
-            
-            let timeText;
-            if (daysAgo === 0) {
-                timeText = 'დღეს';
-            } else if (daysAgo === 1) {
-                timeText = 'გუშინ';
-            } else if (daysAgo < 7) {
-                timeText = `${daysAgo} დღის წინ`;
-            } else if (daysAgo < 30) {
-                const weeksAgo = Math.floor(daysAgo / 7);
-                timeText = `${weeksAgo} კვირის წინ`;
-            } else {
-                const monthsAgo = Math.floor(daysAgo / 30);
-                timeText = `${monthsAgo} თვის წინ`;
+            // Format dates
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const date = new Date(dateStr);
+                const monthNames = ['იან', 'თებ', 'მარ', 'აპრ', 'მაი', 'ივნ', 'ივლ', 'აგვ', 'სექ', 'ოქტ', 'ნოე', 'დეკ'];
+                return `${date.getDate()} ${monthNames[date.getMonth()]}`;
             }
+            
+            // Parse keywords
+            const keywords = job.keywords ? job.keywords.split(',').map(k => k.trim()).filter(k => k) : [];
 
             return (
                 <div className="job-card" onClick={onClick}>
@@ -796,10 +946,19 @@
                         <div className="job-info">
                             <h3 className="job-title">{job.title}</h3>
                             <p className="company-name">{job.company_name}</p>
+                            {keywords.length > 0 && (
+                                <div className="keywords-container">
+                                    {keywords.slice(0, 3).map((keyword, idx) => (
+                                        <span key={idx} className="keyword-tag">
+                                            #{keyword}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                            <div className="dates-info">
+                                <span>{formatDate(job.posted_date || job.created_at)} - {formatDate(job.deadline)}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="job-footer">
-                        <span className="days-ago">{timeText}</span>
                     </div>
                 </div>
             );
@@ -811,9 +970,9 @@
             const [loading, setLoading] = useState(true);
             const [filters, setFilters] = useState({
                 search: '',
-                company: ''
+                industry: ''
             });
-            const [companies, setCompanies] = useState([]);
+            const [industries, setIndustries] = useState([]);
 
             useEffect(() => {
                 loadJobs();
@@ -830,9 +989,9 @@
                     if (error) throw error;
                     setJobs(data || []);
                     
-                    // Extract unique companies
-                    const uniqueCompanies = [...new Set((data || []).map(job => job.company_name))];
-                    setCompanies(uniqueCompanies.sort());
+                    // Extract unique industries
+                    const uniqueIndustries = [...new Set((data || []).map(job => job.industry).filter(i => i))];
+                    setIndustries(uniqueIndustries.sort());
                 } catch (error) {
                     console.error('Error loading jobs:', error);
                 } finally {
@@ -855,7 +1014,7 @@
             function clearFilters() {
                 setFilters({
                     search: '',
-                    company: ''
+                    industry: ''
                 });
             }
 
@@ -871,8 +1030,8 @@
                     if (!matchesSearch) return false;
                 }
 
-                // Company filter
-                if (filters.company && job.company_name !== filters.company) {
+                // Industry filter
+                if (filters.industry && job.industry !== filters.industry) {
                     return false;
                 }
 
@@ -889,11 +1048,6 @@
 
             return (
                 <div className="container">
-                    <div className="page-header">
-                        <h1 className="page-title">ვაკანსიები</h1>
-                        <p className="page-subtitle">იპოვე შენთვის სასურველი სამუშაო</p>
-                    </div>
-
                     {/* Filters Section */}
                     <div className="filters-container">
                         <div className="filters-grid">
@@ -908,15 +1062,15 @@
                                 />
                             </div>
                             <div className="filter-group">
-                                <label className="filter-label">კომპანია</label>
+                                <label className="filter-label">ინდუსტრია</label>
                                 <select 
                                     className="filter-select"
-                                    value={filters.company}
-                                    onChange={(e) => handleFilterChange('company', e.target.value)}
+                                    value={filters.industry}
+                                    onChange={(e) => handleFilterChange('industry', e.target.value)}
                                 >
-                                    <option value="">ყველა კომპანია</option>
-                                    {companies.map(company => (
-                                        <option key={company} value={company}>{company}</option>
+                                    <option value="">ყველა ინდუსტრია</option>
+                                    {industries.map(industry => (
+                                        <option key={industry} value={industry}>{industry}</option>
                                     ))}
                                 </select>
                             </div>
@@ -1039,14 +1193,25 @@
 
             return (
                 <div className="container">
-                    <div className="page-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem'}}>
-                        <div>
-                            <h1 className="page-title">რეკრუტერები</h1>
-                            <p className="page-subtitle">ჩვენი პროფესიონალი რეკრუტერები</p>
+                    <div className="page-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '2rem'}}>
+                        <div style={{flex: '1', minWidth: '300px'}}>
+                            <h1 className="page-title" style={{marginBottom: '1rem'}}>რეკრუტინგი და კარიერული მხარდაჭერა</h1>
+                            <div style={{color: 'var(--text-light)', fontSize: '1rem', lineHeight: '1.8', maxWidth: '800px'}}>
+                                <p style={{marginBottom: '1rem'}}>
+                                    პლატფორმაზე გაერთიანებულია როგორც პროფესიონალი რეკრუტერები, ასევე კარიერული კონსულტანტები და სხვადასხვა სფეროს სპეციალისტები, რომლებიც გეხმარებიან:
+                                </p>
+                                <ul style={{marginLeft: '1.5rem', marginBottom: '1.5rem'}}>
+                                    <li>რეზიუმეს და კარიერული პროფილის დახვეწაში</li>
+                                    <li>კარიერული მიმართულების სწორად განსაზღვრაში</li>
+                                    <li>დამსაქმებლებთან დაკავშირებაში</li>
+                                    <li>დასაქმების პროცესის ყველა ეტაპზე მხარდაჭერაში</li>
+                                </ul>
+                            </div>
                         </div>
                         <button 
                             className="btn btn-primary"
                             onClick={() => setCurrentPage('register-recruiter')}
+                            style={{flexShrink: 0}}
                         >
                             გახდი რეკრუტერი
                         </button>
@@ -1062,7 +1227,15 @@
                             {recruiters.map(recruiter => (
                                 <div key={recruiter.id} className="recruiter-card">
                                     <div className="recruiter-avatar">
-                                        {recruiter.full_name.charAt(0)}
+                                        {recruiter.photo_url ? (
+                                            <img 
+                                                src={recruiter.photo_url} 
+                                                alt={recruiter.full_name}
+                                                className="recruiter-photo"
+                                            />
+                                        ) : (
+                                            recruiter.full_name.charAt(0)
+                                        )}
                                     </div>
                                     <h3 className="recruiter-name">{recruiter.full_name}</h3>
                                     <p className="recruiter-bio">{recruiter.bio}</p>
@@ -1092,7 +1265,8 @@
             const [formData, setFormData] = useState({
                 full_name: '',
                 bio: '',
-                linkedin_url: ''
+                linkedin_url: '',
+                photo_url: ''
             });
             const [message, setMessage] = useState({ type: '', text: '' });
             const [loading, setLoading] = useState(false);
@@ -1126,7 +1300,8 @@
                     setFormData({
                         full_name: '',
                         bio: '',
-                        linkedin_url: ''
+                        linkedin_url: '',
+                        photo_url: ''
                     });
                 } catch (error) {
                     setMessage({ type: 'error', text: 'შეცდომა: ' + error.message });
@@ -1171,6 +1346,20 @@
                                 />
                             </div>
                             <div className="form-group">
+                                <label className="form-label">ფოტოს ბმული (URL)</label>
+                                <input 
+                                    type="url" 
+                                    name="photo_url"
+                                    className="form-input"
+                                    value={formData.photo_url}
+                                    onChange={handleChange}
+                                    placeholder="https://example.com/your-photo.jpg"
+                                />
+                                <small style={{color: 'var(--text-light)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block'}}>
+                                    ოფციონალური - თქვენი პროფესიონალური ფოტოს ბმული (ატვირთეთ Imgur, Google Drive ან სხვა სერვისზე)
+                                </small>
+                            </div>
+                            <div className="form-group">
                                 <label className="form-label">LinkedIn პროფილის ბმული</label>
                                 <input 
                                     type="url" 
@@ -1206,10 +1395,30 @@
                 logo_url: '',
                 description: '',
                 contact_info: '',
+                industry: '',
+                keywords: '',
+                posted_date: new Date().toISOString().split('T')[0],
                 deadline: ''
             });
             const [message, setMessage] = useState({ type: '', text: '' });
             const [loading, setLoading] = useState(false);
+
+            // Industry options
+            const industries = [
+                'IT & ტექნოლოგიები',
+                'ფინანსები & ბანკინგი',
+                'მარკეტინგი & PR',
+                'სეილზი & გაყიდვები',
+                'HR & რეკრუტინგი',
+                'დიზაინი & კრეატივი',
+                'ოპერაციები & მენეჯმენტი',
+                'ინჟინერია',
+                'განათლება',
+                'ჯანდაცვა',
+                'ლოჯისტიკა',
+                'HoReCa',
+                'სხვა'
+            ];
 
             function handleChange(e) {
                 setFormData({
@@ -1243,6 +1452,9 @@
                         logo_url: '',
                         description: '',
                         contact_info: '',
+                        industry: '',
+                        keywords: '',
+                        posted_date: new Date().toISOString().split('T')[0],
                         deadline: ''
                     });
                 } catch (error) {
@@ -1315,6 +1527,46 @@
                                     onChange={handleChange}
                                     required
                                     style={{minHeight: '100px'}}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">ინდუსტრია *</label>
+                                <select
+                                    name="industry"
+                                    className="form-input"
+                                    value={formData.industry}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">აირჩიეთ ინდუსტრია</option>
+                                    {industries.map(ind => (
+                                        <option key={ind} value={ind}>{ind}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">საკვანძო სიტყვები (Keywords)</label>
+                                <input 
+                                    type="text" 
+                                    name="keywords"
+                                    className="form-input"
+                                    value={formData.keywords}
+                                    onChange={handleChange}
+                                    placeholder="მაგ: React, TypeScript, Remote"
+                                />
+                                <small style={{color: 'var(--text-light)', fontSize: '0.85rem', marginTop: '0.25rem', display: 'block'}}>
+                                    გამოყავით მძიმით. მაგ: React, TypeScript, Remote
+                                </small>
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">ვაკანსიის გამოქვეყნების თარიღი *</label>
+                                <input 
+                                    type="date" 
+                                    name="posted_date"
+                                    className="form-input"
+                                    value={formData.posted_date}
+                                    onChange={handleChange}
+                                    required
                                 />
                             </div>
                             <div className="form-group">
