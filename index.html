@@ -319,16 +319,16 @@
         .keywords-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
         }
 
         .keyword-tag {
             display: inline-block;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             background: linear-gradient(135deg, var(--primary-light), var(--accent));
             color: white;
-            border-radius: 20px;
+            border-radius: 12px;
             font-size: 0.75rem;
             font-weight: 500;
         }
@@ -527,16 +527,16 @@
         }
 
         .recruiters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .recruiter-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 2.5rem;
+            border-radius: 12px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
             cursor: pointer;
@@ -544,23 +544,20 @@
         }
 
         .recruiter-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(124, 58, 237, 0.12);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
             border-color: var(--primary-light);
         }
 
         .recruiter-header {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
+            align-items: flex-start;
+            gap: 1.25rem;
         }
 
         .recruiter-initials {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             display: flex;
@@ -572,34 +569,40 @@
             flex-shrink: 0;
         }
 
+        .recruiter-info {
+            flex: 1;
+            min-width: 0;
+        }
+
         .recruiter-name {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            margin: 0;
+            margin: 0 0 0.25rem 0;
             color: var(--text);
         }
 
         .recruiter-subtitle {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-style: italic;
             color: var(--text-light);
-            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
         }
 
         .recruiter-bio {
             color: var(--text);
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
         }
 
         .linkedin-link {
             color: var(--primary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
         }
 
         .linkedin-link:hover {
@@ -1273,37 +1276,37 @@
                                             <div className="recruiter-initials">
                                                 {recruiter.full_name.charAt(0)}
                                             </div>
-                                            <div style={{flex: 1}}>
+                                            <div className="recruiter-info">
                                                 <h3 className="recruiter-name">{recruiter.full_name}</h3>
                                                 {recruiter.subtitle && (
                                                     <p className="recruiter-subtitle">{recruiter.subtitle}</p>
                                                 )}
+                                                <p className="recruiter-bio">{renderBio(recruiter.bio)}</p>
+                                                {keywords.length > 0 && (
+                                                    <div className="keywords-container">
+                                                        {keywords.map((keyword, idx) => (
+                                                            <span key={idx} className="keyword-tag">
+                                                                #{keyword}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                                {recruiter.linkedin_url && (
+                                                    <a 
+                                                        href={recruiter.linkedin_url} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer"
+                                                        className="linkedin-link"
+                                                        onClick={(e) => e.stopPropagation()}
+                                                    >
+                                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                                        </svg>
+                                                        LinkedIn
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
-                                        <p className="recruiter-bio">{renderBio(recruiter.bio)}</p>
-                                        {keywords.length > 0 && (
-                                            <div className="keywords-container" style={{marginBottom: '1rem'}}>
-                                                {keywords.map((keyword, idx) => (
-                                                    <span key={idx} className="keyword-tag">
-                                                        #{keyword}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        )}
-                                        {recruiter.linkedin_url && (
-                                            <a 
-                                                href={recruiter.linkedin_url} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="linkedin-link"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                                </svg>
-                                                LinkedIn
-                                            </a>
-                                        )}
                                     </div>
                                 );
                             })}
