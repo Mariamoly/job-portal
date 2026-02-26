@@ -875,6 +875,15 @@
         const { useState, useEffect } = React;
         const { createClient } = supabase;
 
+        // Clean URL from Facebook/Google tracking parameters
+        (function cleanURL() {
+            const url = new URL(window.location);
+            if (url.searchParams.has('fbclid') || url.searchParams.has('gclid') || url.searchParams.has('utm_source')) {
+                url.search = ''; // Remove all query parameters
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        })();
+
         // Initialize Supabase
         const supabaseUrl = 'https://tpywljiizpthimygcjoo.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRweXdsamlpenB0aGlteWdjam9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3NDYwNjAsImV4cCI6MjA4NDMyMjA2MH0.cSM-SYpqbyL-W3sXXBq_4Pq8QcGUPXEDlnX1I6yw1b4';
@@ -885,8 +894,13 @@
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
             function handleNavClick(page) {
-                setCurrentPage(page);
                 setMobileMenuOpen(false);
+                // Let the hash change trigger the page change via App's useEffect
+                if (page === 'home') {
+                    window.location.hash = '';
+                } else {
+                    window.location.hash = page;
+                }
             }
 
             return (
@@ -914,14 +928,14 @@
                                 ვაკანსიები
                             </a>
                             <a 
-                                href="#" 
+                                href="#recruiters" 
                                 className={`nav-link ${currentPage === 'recruiters' ? 'active' : ''}`}
                                 onClick={(e) => { e.preventDefault(); handleNavClick('recruiters'); }}
                             >
                                 რეკრუტერები
                             </a>
                             <a 
-                                href="#" 
+                                href="#post-job" 
                                 className={`nav-link ${currentPage === 'post-job' ? 'active' : ''}`}
                                 onClick={(e) => { e.preventDefault(); handleNavClick('post-job'); }}
                             >
