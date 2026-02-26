@@ -169,6 +169,58 @@
                 padding: 0.75rem 0;
                 border-bottom: 1px solid var(--border);
             }
+
+            .recruiter-card {
+                padding: 1.25rem;
+            }
+
+            .recruiter-header {
+                gap: 1rem;
+            }
+
+            .recruiter-initials {
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+
+            .recruiter-name {
+                font-size: 1.1rem;
+            }
+
+            .recruiter-subtitle {
+                font-size: 0.85rem;
+            }
+
+            .recruiter-bio {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .keyword-tag {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.5rem;
+            }
+
+            .linkedin-link {
+                font-size: 0.8rem;
+            }
+
+            .page-header {
+                padding: 1.5rem 0 !important;
+            }
+
+            .page-header h1 {
+                font-size: 1.5rem !important;
+            }
+
+            .page-header p, .page-header div {
+                font-size: 0.9rem !important;
+            }
+
+            .page-header ul {
+                font-size: 0.85rem !important;
+            }
         }
 
         .nav-link {
@@ -2062,8 +2114,10 @@
             useEffect(() => {
                 async function handleHashChange() {
                     const hash = window.location.hash.slice(1);
+                    console.log('Hash detected:', hash);
                     
                     if (hash.startsWith('vacancy/')) {
+                        console.log('Routing to vacancy detail');
                         // Load vacancy by ID from URL
                         const vacancyId = hash.replace('vacancy/', '');
                         try {
@@ -2082,6 +2136,7 @@
                             setCurrentPage('home');
                         }
                     } else if (hash.startsWith('recruiter/')) {
+                        console.log('Routing to recruiter detail');
                         // Load recruiter by ID from URL
                         const recruiterId = hash.replace('recruiter/', '');
                         try {
@@ -2101,14 +2156,19 @@
                             setCurrentPage('recruiters');
                         }
                     } else if (hash === 'admin') {
+                        console.log('Routing to admin');
                         setCurrentPage('admin');
                     } else if (hash === 'recruiters') {
+                        console.log('Routing to recruiters page');
                         setCurrentPage('recruiters');
                     } else if (hash === 'post-job') {
+                        console.log('Routing to post-job');
                         setCurrentPage('post-job');
                     } else if (hash === 'register-recruiter') {
+                        console.log('Routing to register-recruiter');
                         setCurrentPage('register-recruiter');
                     } else {
+                        console.log('Routing to home (default)');
                         setCurrentPage('home');
                     }
                 }
