@@ -1644,6 +1644,7 @@
                     const { data, error } = await supabaseClient
                         .from('talents')
                         .select('*')
+                        .eq('is_approved', true)
                         .gte('expires_at', today)
                         .order('created_at', { ascending: false });
                     if (error) throw error;
@@ -1842,12 +1843,12 @@
                         keywords: formData.keywords || null,
                         linkedin_url: formData.linkedin_url || null,
                         duration_months: parseInt(formData.duration_months),
-                        expires_at: expiresAt.toISOString().split('T')[0]
+                        expires_at: expiresAt.toISOString().split('T')[0],
+                        is_approved: false
                     }]);
                     if (error) throw error;
-                    setMessage({ type: 'success', text: 'პროფილი წარმატებით დაემატა! ახლავე გამოჩნდება ტალანტების სიაში.' });
+                    setMessage({ type: 'success', text: 'პროფილი წარმატებით გაიგზავნა! ადმინის დამტკიცების შემდეგ გამოჩნდება ტალანტების სიაში.' });
                     setFormData({ full_name: '', avatar_url: '', industry: '', summary: '', keywords: '', linkedin_url: '', duration_months: 1 });
-                    setTimeout(() => window.location.hash = 'talents', 2000);
                 } catch (error) {
                     setMessage({ type: 'error', text: 'შეცდომა: ' + error.message });
                 } finally {
@@ -2118,6 +2119,7 @@
         function AdminPage() {
             const [vacancies, setVacancies] = useState([]);
             const [recruiters, setRecruiters] = useState([]);
+            const [talents, setTalents] = useState([]);
             const [loading, setLoading] = useState(true);
             const [isAuthenticated, setIsAuthenticated] = useState(false);
             const [password, setPassword] = useState('');
@@ -2253,6 +2255,36 @@
                 }
             }
 
+            async function approveTalent(id) {
+                try {
+                    const { error } = await supabaseClient
+                        .from('talents')
+                        .update({ is_approved: true })
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
+            async function deleteTalent(id) {
+                if (!confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?')) return;
+                
+                try {
+                    const { error } = await supabaseClient
+                        .from('talents')
+                        .delete()
+                        .eq('id', id);
+
+                    if (error) throw error;
+                    loadData();
+                } catch (error) {
+                    alert('შეცდომა: ' + error.message);
+                }
+            }
+
             // Login Screen
             if (!isAuthenticated) {
                 return (
@@ -2299,6 +2331,9 @@
                                 </span>
                                 <span style={{color: 'var(--text-light)'}}>
                                     👥 რეკრუტერები: <strong>{recruiters.filter(r => !r.is_approved).length}</strong> მოლოდინში
+                                </span>
+                                <span style={{color: 'var(--text-light)'}}>
+                                    🌟 ტალანტები: <strong>{talents.filter(t => !t.is_approved).length}</strong> მოლოდინში
                                 </span>
                             </div>
                         </div>
@@ -2388,6 +2423,53 @@
                                                 <button 
                                                     className="btn btn-danger btn-small"
                                                     onClick={() => deleteRecruiter(recruiter.id)}
+                                                >
+                                                    წაშლა
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <h2 className="section-title">ტალანტები</h2>
+                        <table className="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>სახელი</th>
+                                    <th>ინდუსტრია</th>
+                                    <th>Summary</th>
+                                    <th>სტატუსი</th>
+                                    <th>მოქმედება</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {talents.map(talent => (
+                                    <tr key={talent.id}>
+                                        <td>{talent.full_name}</td>
+                                        <td>{talent.industries}</td>
+                                        <td>{talent.summary?.substring(0, 50)}...</td>
+                                        <td>
+                                            <span className={`status-badge ${talent.is_approved ? 'status-approved' : 'status-pending'}`}>
+                                                {talent.is_approved ? 'დამტკიცებული' : 'განხილვაში'}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div className="admin-actions">
+                                                {!talent.is_approved && (
+                                                    <button 
+                                                        className="btn btn-success btn-small"
+                                                        onClick={() => approveTalent(talent.id)}
+                                                    >
+                                                        დამტკიცება
+                                                    </button>
+                                                )}
+                                                <button 
+                                                    className="btn btn-danger btn-small"
+                                                    onClick={() => deleteTalent(talent.id)}
                                                 >
                                                     წაშლა
                                                 </button>
