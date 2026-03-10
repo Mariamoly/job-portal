@@ -2684,16 +2684,31 @@
 
             // Update URL hash when page changes
             useEffect(() => {
+                const currentHash = window.location.hash.slice(1);
+                
                 if (currentPage === 'home') {
-                    window.location.hash = '';
+                    if (currentHash !== '') {
+                        window.location.hash = '';
+                    }
                 } else if (currentPage === 'job-detail' && selectedJob) {
-                    window.location.hash = `vacancy/${selectedJob.id}`;
+                    const expectedHash = `vacancy/${selectedJob.id}`;
+                    if (currentHash !== expectedHash) {
+                        window.location.hash = expectedHash;
+                    }
                 } else if (currentPage === 'recruiter-detail' && selectedRecruiter) {
-                    window.location.hash = `recruiter/${selectedRecruiter.id}`;
+                    const expectedHash = `recruiter/${selectedRecruiter.id}`;
+                    if (currentHash !== expectedHash) {
+                        window.location.hash = expectedHash;
+                    }
                 } else if (currentPage === 'talent-detail' && selectedTalent) {
-                    window.location.hash = `talent/${selectedTalent.id}`;
+                    const expectedHash = `talent/${selectedTalent.id}`;
+                    if (currentHash !== expectedHash) {
+                        window.location.hash = expectedHash;
+                    }
                 } else if (currentPage !== 'job-detail' && currentPage !== 'recruiter-detail' && currentPage !== 'talent-detail') {
-                    window.location.hash = currentPage;
+                    if (currentHash !== currentPage) {
+                        window.location.hash = currentPage;
+                    }
                 }
             }, [currentPage, selectedJob, selectedRecruiter, selectedTalent]);
 
