@@ -270,6 +270,31 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
+                z-index: 1001;
+            }
+
+            /* Mobile Menu Overlay */
+            body.menu-open::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+
+            body.menu-open {
+                overflow: hidden;
+            }
+
+            body.menu-open::before {
+                opacity: 1;
+                pointer-events: auto;
             }
 
             .nav-links {
@@ -285,6 +310,8 @@
                 gap: 1.5rem;
                 box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
                 transition: right 0.3s ease;
+                z-index: 1000;
+                overflow-y: auto;
             }
 
             .nav-links.active {
@@ -412,10 +439,9 @@
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
             display: flex;
             gap: 1.5rem;
-            align-items: center;
+            align-items: flex-start;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
@@ -1120,6 +1146,33 @@
         // Navigation Component
         function Navigation({ currentPage, setCurrentPage }) {
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            // Toggle body class for overlay
+            useEffect(() => {
+                if (mobileMenuOpen) {
+                    document.body.classList.add('menu-open');
+                    
+                    // Close menu on overlay click
+                    const handleOverlayClick = (e) => {
+                        if (e.target === document.body && mobileMenuOpen) {
+                            setMobileMenuOpen(false);
+                        }
+                    };
+                    
+                    document.body.addEventListener('click', handleOverlayClick);
+                    
+                    return () => {
+                        document.body.removeEventListener('click', handleOverlayClick);
+                    };
+                } else {
+                    document.body.classList.remove('menu-open');
+                }
+                
+                // Cleanup on unmount
+                return () => {
+                    document.body.classList.remove('menu-open');
+                };
+            }, [mobileMenuOpen]);
 
             function handleNavClick(page) {
                 setMobileMenuOpen(false);
