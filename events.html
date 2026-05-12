@@ -82,90 +82,26 @@
             z-index: 2;
         }
 
-        .light-beam {
-            position: absolute; top: 0; left: -150%; width: 100%; height: 100%;
-            background: linear-gradient(to right, transparent 0%, rgba(193, 255, 0, 0.5) 50%, transparent 100%);
-            transform: skewX(-25deg); animation: beam-sweep 4s infinite; z-index: 3; pointer-events: none;
-        }
-
-        @keyframes beam-sweep {
-            0% { left: -150%; opacity: 0; }
-            20% { opacity: 1; }
-            50% { left: 150%; opacity: 1; }
-            100% { left: 150%; opacity: 0; }
-        }
-
         .h-box { display: inline-block; position: relative; margin-bottom: 10px; }
         .h-bg { position: absolute; top: 0; left: -10px; right: -10px; bottom: 0; z-index: -1; transform: skewX(-12deg); }
         h1, h2 { text-transform: uppercase; margin: 0; line-height: 1.1; }
         .section-padding { padding: 120px 8%; }
 
         .hero h1 { font-size: clamp(35px, 6vw, 85px); letter-spacing: -3px; }
-        .hero-desc { max-width: 700px; font-size: 20px; margin-top: 30px; opacity: 0.7; }
+
+        .hero-desc {
+            max-width: 760px;
+            font-size: 20px;
+            margin-top: 30px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
 
         .cta-main {
             margin-top: 50px; padding: 22px 50px; border-radius: 100px; background: var(--violet);
             color: var(--white); font-weight: 900; text-transform: uppercase; text-decoration: none; transition: 0.4s;
         }
         .cta-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(131, 77, 251, 0.4); }
-
-        .steps-wrapper { margin-top: 80px; display: flex; flex-direction: column; gap: 120px; }
-        .step-row { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; padding: 40px; }
-
-        .neon-bg {
-            position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
-            width: 50%; height: 40%; filter: blur(90px); opacity: 0.12; z-index: -1; border-radius: 50%;
-        }
-        
-        .speaker-visual { position: relative; width: 100%; max-width: 600px; height: 450px; margin-bottom: 40px; display: flex; justify-content: center; align-items: center; }
-        .speaker-img-card { max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); }
-        
-        .step-num {
-            position: absolute; top: 50%; left: -150px; transform: translateY(-50%);
-            font-size: clamp(80px, 15vw, 180px); font-weight: 900; color: transparent;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.08); z-index: -1;
-        }
-
-        .step-content { max-width: 850px; }
-        .pill-tag { display: inline-block; padding: 8px 24px; border-radius: 50px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
-        .speaker-label { display: block; color: var(--yellow); font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-        .step-content p { font-size: 19px; opacity: 0.75; margin-bottom: 20px; }
-        .result-text { font-weight: 900; font-size: 20px; margin-top: 15px; display: block; }
-
-        /* --- ახალი ღილაკის დიზაინი --- */
-        .speaker-btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 14px 35px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid transparent;
-        }
-
-        .speaker-btn:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-        .btn-cyan { color: var(--cyan); border-color: var(--cyan); }
-        .btn-cyan:hover { background: var(--cyan); color: var(--black); box-shadow: 0 0 40px rgba(0, 229, 255, 0.5); }
-
-        .btn-aurora { color: var(--aurora); border-color: var(--aurora); }
-        .btn-aurora:hover { background: var(--aurora); color: var(--black); box-shadow: 0 0 40px rgba(46, 254, 154, 0.5); }
-
-        .btn-lime { color: var(--lime); border-color: var(--lime); }
-        .btn-lime:hover { background: var(--lime); color: var(--black); box-shadow: 0 0 40px rgba(193, 255, 0, 0.5); }
-        /* --------------------------- */
-
-        .location-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; background: var(--dark-gray); border-radius: 40px; padding: 40px; margin-top: 60px; align-items: center; text-align: left; }
-        .map-wrapper { height: 400px; border-radius: 30px; overflow: hidden; filter: grayscale(1) invert(0.9) contrast(1.2); }
-
-        @media (max-width: 1200px) { .step-num { left: 0; top: -100px; transform: none; text-align: center; width: 100%; } .location-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -174,106 +110,60 @@
         <div class="logo">TALANTEBI<span>.GE</span></div>
         <div class="nav-links">
             <a href="#model">სპიკერები</a>
-            <a href="#location">ლოკაცია</a>
+            <a href="#audience">ვისთვის არის</a>
+            <a href="#benefits">რას მიიღებთ</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="modern-date-box">
-            <div class="light-beam"></div>
             <span class="date-main">29 მაისი</span>
         </div>
+
         <div class="hero-title">
-            <div class="h-box"><div class="h-bg" style="background: var(--yellow);"></div><h1 style="color: black;">AI-ით გაძლიერებული</h1></div><br>
-            <div class="h-box"><div class="h-bg" style="background: var(--violet);"></div><h1>ტალანტები</h1></div>
+            <div class="h-box">
+                <div class="h-bg" style="background: var(--yellow);"></div>
+                <h1 style="color: black;">AI-ით გაძლიერებული</h1>
+            </div>
+            <br>
+
+            <div class="h-box">
+                <div class="h-bg" style="background: var(--violet);"></div>
+                <h1>ტალანტები</h1>
+            </div>
         </div>
-        <p class="hero-desc">TBC Concept Space. კომპანიის AI ტრანსფორმაცია ეფექტურობიდან ინოვაციამდე.</p>
+
+        <p class="hero-desc">
+            <span style="
+                display:inline-flex;
+                align-items:center;
+                gap:10px;
+                background:rgba(131,77,251,0.12);
+                border:1px solid rgba(131,77,251,0.35);
+                padding:12px 22px;
+                border-radius:60px;
+                margin-bottom:18px;
+                font-size:15px;
+                font-weight:800;
+                color:var(--yellow);
+                letter-spacing:0.5px;
+                box-shadow:0 0 25px rgba(131,77,251,0.18);
+                backdrop-filter:blur(12px);
+            ">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                15:00 • TBC Concept Space
+            </span>
+
+            <br>
+
+            კომპანიის AI ტრანსფორმაცია ეფექტურობიდან ინოვაციამდე.
+        </p>
+
         <a href="#model" class="cta-main">გაიგე მეტი</a>
     </section>
-
-    <section id="model" class="section-padding">
-        <div style="text-align: center; margin-bottom: 80px;">
-            <div class="h-box"><div class="h-bg" style="background: var(--violet);"></div><h2 style="font-size: 32px; font-weight: 900;">სპიკერები & მოდელი</h2></div>
-        </div>
-
-        <div class="steps-wrapper">
-            <div class="step-row">
-                <div class="neon-bg" style="background: var(--violet);"></div>
-                <div class="speaker-visual">
-                    <img src="https://i.postimg.cc/xT0tFmBh/Untitled-1.png" alt="Sopho" class="speaker-img-card">
-                    <div class="step-num">01</div>
-                </div>
-                <div class="step-content">
-                    <div class="pill-tag" style="background: var(--violet);">ადამიანური კაპიტალი და უწყვეტი სწავლება</div>
-                    <span class="speaker-label">სოფო კიკუაშვილი – გალფის სწავლებისა და განვითარების მენეჯერი, დამოუკიდებელი ტრენერი და კონსულტანტი</span>
-                    <p>ნებისმიერი მასშტაბური ცვლილება ადამიანური კაპიტალის მომზადებით იწყება. თქვენ გაიგებთ, როგორ აღჭუროთ გუნდი ახალი ეპოქის შესაბამისი უნარებით, რათა ტალანტებმა თავად მართონ პროგრესი და ის კომპანიის ინტელექტუალურ აქტივად აქციონ. სოფო გასწავლით, როგორ დანერგოთ ორგანიზაციაში „უწყვეტი სწავლების“ (Continuous Learning) კულტურა, რაც სასიცოცხლოდ მნიშვნელოვანია ხელოვნური ინტელექტის მუდმივი ევოლუციის ფონზე.</p>
-                    <span class="result-text" style="color: var(--violet);">შედეგი: – AI-აზროვნებით გაძლიერებული გუნდი, რომელიც მზად არის მუდმივი ზრდისა და ლიდერობისთვის.</span>
-                </div>
-            </div>
-
-            <div class="step-row">
-                <div class="neon-bg" style="background: var(--cyan);"></div>
-                <div class="speaker-visual">
-                    <img src="https://i.postimg.cc/ZqKCXBQz/Gemini-Generated-Image-752y73752y73752y.png" alt="Nino" class="speaker-img-card">
-                    <div class="step-num" style="-webkit-text-stroke-color: var(--cyan);">02</div>
-                </div>
-                <div class="step-content">
-                    <div class="pill-tag" style="background: var(--cyan); color: black;">საოპერაციო სისტემების ოპტიმიზაცია</div>
-                    <span class="speaker-label">ნინო გორგაძე – PMP® და PMI-ACP® სერტიფიცირებული პროექტებისა და პორტფოლიოს მენეჯერი, 20-წლიანი გამოცდილებით</span>
-                    <p>მომზადებული ტალანტების გარდა, აუცილებელია გამართული და დაჩქარებული საოპერაციო სისტემა. ნინო წარმოგიდგენთ ბიზნესის ოპტიმიზაციის უმაღლეს დონეს, სადაც ხელოვნური ინტელექტი რუტინულ ბარიერებს სრულად აქრობს. ჩვენ ვქმნით ავტომატიზებულ მექანიზმებს, რომლებიც თქვენს საქმიანობას უპრეცედენტო სისწრაფესა და საოპერაციო სიმძლავრეს ანიჭებს.</p>
-                    <span class="result-text" style="color: var(--cyan);">შედეგი: სრულყოფილი ავტომატიზაცია და ბიზნესი, რომელიც საათივით მუშაობს.</span>
-                    <a href="https://www.ninogorgadze.com/" target="_blank" class="speaker-btn btn-cyan">გაიგეთ მეტი ნინოზე</a>
-                </div>
-            </div>
-
-            <div class="step-row">
-                <div class="neon-bg" style="background: var(--aurora); opacity: 0.2; filter: blur(100px);"></div>
-                <div class="speaker-visual">
-                    <img src="https://i.postimg.cc/0NjMKXg1/1777970977224.png" alt="Irakli" class="speaker-img-card">
-                    <div class="step-num" style="-webkit-text-stroke-color: var(--aurora);">03</div>
-                </div>
-                <div class="step-content">
-                    <div class="pill-tag" style="background: var(--aurora); color: black;">პროდუქტის განვითარება და AI აგენტები</div>
-                    <span class="speaker-label">ირაკლი ჩხეიძე – TBC UZ-ისა და Payme UZ-ის ციფრული გაყიდვების ხელმძღვანელი</span>
-                    <p>აქციეთ თქვენი იდეა რეალობად: ირაკლი გაჩვენებთ, როგორ გადალახოთ ტექნიკური ბარიერები და გარდაქმნათ ჩანაფიქრი მუშა პროდუქტად რამდენიმე საათში, კოდის წერის გარეშე. ის გაგიზიარებთ ექსკლუზიურ გამოცდილებას იმ სისტემებიდან, რომლებიც 23 მილიონზე მეტ მომხმარებელს ემსახურება და სადაც AI აგენტები ყოველდღიური სამუშაო პროცესის განუყოფელი ნაწილია.</p>
-                    <span class="result-text" style="color: var(--aurora);">შედეგი: საკუთარი AI აგენტის შექმნა, რომელიც იდეებს რეალურ პროდუქტად გარდაქმნის.</span>
-                    <a href="https://aiworkshop.ge/" target="_blank" class="speaker-btn btn-aurora">გაიგეთ მეტი ვორქშოფზე</a>
-                </div>
-            </div>
-
-            <div class="step-row">
-                <div class="neon-bg" style="background: var(--lime);"></div>
-                <div class="speaker-visual">
-                    <img src="https://i.postimg.cc/rw0Gvpmy/Gemini-Generated-Image-vocgokvocgokvocg-(1).png" alt="Beka" class="speaker-img-card">
-                    <div class="step-num" style="-webkit-text-stroke-color: var(--lime);">04</div>
-                </div>
-                <div class="step-content">
-                    <div class="pill-tag" style="background: var(--lime); color: black;">ინოვაციური რეკრუტირება და მასშტაბირება</div>
-                    <span class="speaker-label">ბექა ზაქაიძე – Revelo-ს დამფუძნებელი, სერიული ტექ-მეწარმე</span>
-                    <p>თქვენ გაეცნობით Revelo-ს — ინოვაციურ ინსტრუმენტს, რომლის AI-მოდერატორი დამოუკიდებლად ატარებს გასაუბრებებს 50-ზე მეტ ენაზე, სვამს დამაზუსტებელ კითხვებს და სიღრმისეულად აანალიზებს კანდიდატის თავსებადობას. Revelo შლის დროსა და საზღვრებს, რაც გაძლევთ შესაძლებლობას, ერთდროულად ათასობით ადამიანს ჩაუტაროთ ინტერვიუ მსოფლიოს ნებისმიერ წერტილში.</p>
-                    <span class="result-text" style="color: var(--lime);">შედეგი: შერჩევის პროცესის მაქსიმალური დაჩქარება და გლობალური მასშტაბირება.</span>
-                    <a href="https://revelo.me/" target="_blank" class="speaker-btn btn-lime">აღმოაჩინე Revelo</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="location" class="section-padding">
-        <div class="h-box"><div class="h-bg" style="background: var(--yellow);"></div><h2 style="color: black; font-size: 34px; font-weight: 900;">ლოკაცია</h2></div>
-        <div class="location-container">
-            <div class="location-info">
-                <h4>TBC Concept Space</h4>
-                <p>კოტე მარჯანიშვილის ქუჩა #7, თბილისი</p>
-            </div>
-            <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m13!1m2!1m1!1s0x40440cd0300632b5%3A0xc3c5f4f89d380e!2s7%20Kote%20Marjanishvili%20St%2C%20T'bilisi!5e0!3m2!1sen!2sge!4v1715080000000!5m2!1sen!2sge" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
-
-    <footer style="padding: 60px 40px; text-align: center; opacity: 0.4; font-size: 12px;">
-        TALANTEBI.GE © 2026 | TBILISI, GEORGIA
-    </footer>
 
 </body>
 </html>
