@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="ka" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="description" content="talantebi.ge - იპოვე შენთვის სასურველი სამუშაო.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://talantebi.ge/job-portal.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%237C3AED'/%3E%3C/svg%3E">
+    <title>ტალანტები.გე | Talantebi.ge</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans Georgian"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            900: '#4c1d95',
+                        },
+                        neon: '#c8ff00'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans Georgian', sans-serif;
+            background-color: #faf9fc;
+            color: #1e1b4b;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 25s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        /* WhatsApp Subscribe Button */
+        .whatsapp-button{
+            position:relative;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            min-height:40px;
+            padding:0 16px 0 8px;
+            border:1px solid rgba(105,70,237,.09);
+            border-radius:999px;
+            background:rgba(255,255,255,.94);
+            color:#25222c;
+            font-size:12.5px;
+            font-weight:650;
+            letter-spacing:-.01em;
+            cursor:pointer;
+            box-shadow:
+                0 6px 16px rgba(47,35,80,.08),
+                0 1px 4px rgba(47,35,80,.04);
+            transition:
+                transform .28s cubic-bezier(.2,.8,.2,1),
+                box-shadow .28s ease,
+                border-color .28s ease;
+            font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Arial,sans-serif;
+        }
+        .whatsapp-button:hover{
+            transform:translateY(-2px);
+            border-color:rgba(105,70,237,.16);
+            box-shadow:
+                0 10px 22px rgba(47,35,80,.11),
+                0 2px 6px rgba(47,35,80,.05);
+        }
+        .whatsapp-button:active{
+            transform:scale(.97);
+        }
+        .bell-wrap{
+            position:relative;
+            width:26px;
+            height:26px;
+            flex:0 0 26px;
+            display:grid;
+            place-items:center;
+            border-radius:9px;
+            background:rgba(181,140,255,.10);
+            color:#6946ED;
+        }
+        .bell-icon{
+            width:14px;
+            height:14px;
+            display:block;
+        }
+        .status-dot{
+            position:absolute;
+            top:2px;
+            right:2px;
+            width:6px;
+            height:6px;
+            border-radius:50%;
+            background:#C8FF00;
+            box-shadow:0 0 0 2px #fff;
+        }
+        .status-dot::before{
+            content:"";
+            position:absolute;
+            inset:-3px;
+            border-radius:50%;
+            background:rgba(200,255,0,.45);
+            animation:softPulse 2.8s ease-out infinite;
+            z-index:-1;
+        }
+        @keyframes softPulse{
+            0%{ transform:scale(.75); opacity:.65; }
+            55%,100%{ transform:scale(1.9); opacity:0; }
+        }
+        .whatsapp-mark{
+            width:14px;
+            height:14px;
+            margin-left:1px;
+            color:#6946ED;
+            flex:0 0 auto;
+        }
+        @media (prefers-reduced-motion:reduce){
+            .status-dot::before{animation:none}
+            .whatsapp-button{transition:none}
+        }
+        @media(max-width:520px){
+            .whatsapp-button{
+                width:100%;
+                justify-content:center;
+                padding:0 14px;
+                font-size:12.5px;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f0f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d8b4fe;
+            border-radius: 4px;
+        }
+    </style>
+
+    <!-- React, Supabase & Dependencies -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-[#faf9fc] text-slate-900 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white relative overflow-x-hidden w-full">
+    <div id="root" class="w-full overflow-x-hidden"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { createClient } = supabase;
+
+        // Supabase Client
+        const supabaseUrl = 'https://tpywljiizpthimygcjoo.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRweXdsamlpenB0aGlteWdjam9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3NDYwNjAsImV4cCI6MjA4NDMyMjA2MH0.cSM-SYpqbyL-W3sXXBq_4Pq8QcGUPXEDlnX1I6yw1b4';
+        const supabaseClient = createClient(supabaseUrl, supabaseKey);
+
+        const CITIES = ['ყველა ლოკაცია', 'თბილისი', 'ბათუმი', 'ქუთაისი', 'რუსთავი', 'ფოთი', 'ზუგდიდი', 'თელავი', 'გორი', 'დისტანციური', 'სხვა'];
+        const INDUSTRIES = [
+            'IT & ტექნოლოგიები', 'ფინანსები & ბანკინგი', 'მარკეტინგი & PR', 'გაყიდვები',
+            'HR & რეკრუტინგი', 'დიზაინი & კრეატივი', 'საოპერაციო და მენეჯმენტი', 'ინჟინერია',
+            'განათლება', 'ჯანდაცვა', 'ლოჯისტიკა', 'HoReCa', 'იურიდიული და სამართალი',
+            'ადმინისტრაცია და ოფისი', 'მშენებლობა და უძრავი ქონება', 'წარმოება და ხელოსნობა',
+            'ტრანსპორტი და ავტო-სერვისი', 'დაცვა და უსაფრთხოება', 'ტურიზმი', 'სხვა'
+        ];
+
+        // Canvas-ის დამხმარე ფუნქციები
+        function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            if (fill) ctx.fill();
+            if (stroke) ctx.stroke();
+        }
+
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > maxWidth && n > 0) {
+                    ctx.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                } else {
+                    line = testLine;
+                }
+            }
+            ctx.fillText(line, x, y);
+        }
+
+        // ==========================================
+        // 🎨 3 დიზაინ-ვარიანტის გენერატორი (STORY HD 1080x1920)
+        // ==========================================
+        // ==========================================
+        // 🎨 Story/Reels გენერატორი — Clean Light · Kinetic (1080x1920)
+        // ==========================================
+        async function loadCanvasImage(url) {
+            if (!url) return null;
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                let done = false;
+                const finish = (val) => { if (!done) { done = true; resolve(val); } };
+                img.onload = () => finish(img);
+                img.onerror = () => finish(null);
+                setTimeout(() => finish(null), 3500);
+                img.src = url;
+            });
+        }
+
+        async function generateStoryImage(job) {
+            // ფონტების ჩატვირთვა canvas-ზე დახატვამდე (განსაკუთრებით ქართული ასოებისთვის)
+            try {
+                await Promise.all([
+                    document.fonts.load('800 40px "Plus Jakarta Sans"', 'Aa'),
+                    document.fonts.load('700 40px "Plus Jakarta Sans"', 'Aa'),
+                    document.fonts.load('800 40px "Noto Sans Georgian"', 'ა'),
+                    document.fonts.load('700 40px "Noto Sans Georgian"', 'ა')
+                ]);
+            } catch (e) { /* ფონტის შეცდომა არ უნდა აჩერებდეს გენერაციას */ }
+
+            const width = 1080;
+            const height = 1920;
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+
+            const locationText = job.location || 'თბილისი';
+            const keywords = job.keywords
+                ? job.keywords.split(',').map(k => k.trim().replace(/^#+/, '')).filter(k => k)
+                : [];
+
+            // ლოგო ცდილობს ჩაიტვირთოს (CORS-ის გამო შესაძლოა ვერ დაიხატოს — მაშინ ასო-ავატარზე გადავა)
+            const logoImg = await loadCanvasImage(job.logo_url);
+
+            const LABEL_BADGE = 'Vacancy';                  // ზედა მარჯვენა ბეჯი
+            const LABEL_CTA   = 'talantebi.ge';              // ქვედა ღილაკის ტექსტი
+
+            const S = width / 360;
+            const W = 360, H = 640, PAD = 32;
+            const C = { purple: '#6946ED', lime: '#C8FF00', black: '#050505', white: '#FFFFFF' };
+            const FONT = (w, size) => `${w} ${size}px "Plus Jakarta Sans", "Noto Sans Georgian", sans-serif`;
+            const hasGeo = s => /[\u10A0-\u10FF\u1C90-\u1CBF]/.test(s);
+            const styleText = s => hasGeo(s) ? s : s.toUpperCase();
+
+            // ასო-ასო ტექსტი letter-spacing-ით (ყველა ბრაუზერზე მუშაობს)
+            const spacedW = (text, sp) => ctx.measureText(text).width + sp * Math.max(0, text.length - 1);
+            const drawSpaced = (text, x, y, sp) => {
+                if (!sp) { ctx.fillText(text, x, y); return; }
+                for (let i = 0; i < text.length; i++) {
+                    const off = ctx.measureText(text.slice(0, i)).width + sp * i;
+                    ctx.fillText(text[i], x + off, y);
+                }
+            };
+            // ტექსტის ჩატევა მოცემულ სიგანეში (ჯერ პატარავდება, შემდეგ იჭრება …-ით)
+            const drawFit = (text, x, y, maxW, weight, size, minSize, spEm, color) => {
+                let s = size, sp;
+                do {
+                    ctx.font = FONT(weight, s);
+                    sp = s * spEm;
+                    if (spacedW(text, sp) <= maxW) break;
+                    s -= 0.5;
+                } while (s >= minSize);
+                let t = text;
+                while (t.length > 1 && spacedW(t, sp) > maxW) t = t.slice(0, -1);
+                if (t !== text) t = t.trim() + '…';
+                ctx.fillStyle = color;
+                drawSpaced(t, x, y, sp);
+                return spacedW(t, sp);
+            };
+            const drawIcon = (d, x, y, size, color, lw) => {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.scale(size / 24, size / 24);
+                ctx.strokeStyle = color; ctx.lineWidth = lw;
+                ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+                ctx.stroke(new Path2D(d));
+                ctx.restore();
+            };
+            const shadowOn = (blur, offY, alpha) => {
+                // shadowBlur/Offset transform-ს არ ექვემდებარება -> ხელით ვამრავლებთ
+                ctx.shadowColor = `rgba(0,0,0,${alpha})`;
+                ctx.shadowBlur = blur * S;
+                ctx.shadowOffsetY = offY * S;
+            };
+            const shadowOff = () => { ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; };
+            const fmtDate = (d) => {
+                if (!d) return '';
+                const dt = new Date(d);
+                if (isNaN(dt)) return '';
+                const m = ['იან', 'თებ', 'მარ', 'აპრ', 'მაი', 'ივნ', 'ივლ', 'აგვ', 'სექ', 'ოქტ', 'ნოე', 'დეკ'];
+                return `${dt.getDate()} ${m[dt.getMonth()]}`;
+            };
+
+            const ICON_PIN   = 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z';
+            const ICON_WORK  = 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z';
+            const ICON_CLOCK = 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z';
+            const ICON_ARROW = 'M14 5l7 7m0 0l-7 7m7-7H3';
+
+            ctx.save();
+            ctx.scale(S, S);
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'left';
+
+            // --- ფონი + ambient glow-ები ---
+            ctx.fillStyle = '#F8FAFC';
+            ctx.fillRect(0, 0, W, H);
+            const glow = (cx, cy, r, rgb, a) => {
+                const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+                g.addColorStop(0, `rgba(${rgb},${a})`);
+                g.addColorStop(0.5, `rgba(${rgb},${a * 0.75})`);
+                g.addColorStop(1, `rgba(${rgb},0)`);
+                ctx.fillStyle = g;
+                ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+            };
+            glow(64, 64, 220, '105,70,237', 0.15);
+            glow(296, 576, 220, '200,255,0', 0.40);
+
+            // --- ზედა ხაზი: ბრენდი + Vacancy ბეჯი ---
+            const brand = 'TALANTEBI.GE';
+            ctx.font = FONT(800, 10);
+            const brandSp = 2;
+            const pillW = spacedW(brand, brandSp) + brandSp + 32, pillH = 31;
+            shadowOn(2, 1, 0.06);
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            roundRect(ctx, PAD, PAD, pillW, pillH, pillH / 2, true, false);
+            shadowOff();
+            ctx.strokeStyle = 'rgba(229,231,235,0.9)'; ctx.lineWidth = 1;
+            roundRect(ctx, PAD, PAD, pillW, pillH, pillH / 2, false, true);
+            ctx.fillStyle = C.black;
+            drawSpaced(brand, PAD + 16, PAD + pillH / 2 + 0.5, brandSp);
+
+            const badge = LABEL_BADGE.toUpperCase();
+            ctx.font = FONT(800, 9);
+            const badgeSp = 0.9;
+            const badgeW = spacedW(badge, badgeSp) + badgeSp + 24, badgeH = 26;
+            const badgeX = W - PAD - badgeW, badgeY = PAD + (pillH - badgeH) / 2;
+            shadowOn(2, 1, 0.06);
+            ctx.fillStyle = C.lime;
+            roundRect(ctx, badgeX, badgeY, badgeW, badgeH, badgeH / 2, true, false);
+            shadowOff();
+            ctx.strokeStyle = 'rgba(0,0,0,0.10)';
+            roundRect(ctx, badgeX, badgeY, badgeW, badgeH, badgeH / 2, false, true);
+            ctx.fillStyle = C.black;
+            drawSpaced(badge, badgeX + 12, badgeY + badgeH / 2 + 0.5, badgeSp);
+
+            // --- ქვედა ბლოკი: 3 ინფო-ბარათი + CTA (პირველი ვხატავთ, რომ ზუსტად ვიცოდეთ შუა ბლოკის ადგილი) ---
+            const ROW_H = 48, ROW_GAP = 8, CTA_H = 44, BLOCK_GAP = 14;
+            const rowsBlockH = ROW_H * 3 + ROW_GAP * 2;
+            const rowsTop = H - PAD - CTA_H - BLOCK_GAP - rowsBlockH;
+            const dateRange = job.posted_date && job.deadline
+                ? `${fmtDate(job.posted_date)} - ${fmtDate(job.deadline)}`
+                : job.deadline
+                    ? `ვადა: ${fmtDate(job.deadline)}`
+                    : `გამოქვეყნდა: ${fmtDate(job.posted_date || job.created_at) || 'დღეს'}`;
+            const rows = [
+                { icon: ICON_PIN,   text: locationText },
+                { icon: ICON_WORK,  text: job.industry || 'ვაკანსია' },
+                { icon: ICON_CLOCK, text: dateRange }
+            ];
+            rows.forEach((r, i) => {
+                const y = rowsTop + i * (ROW_H + ROW_GAP);
+                shadowOn(2, 1, 0.06);
+                ctx.fillStyle = 'rgba(255,255,255,0.92)';
+                roundRect(ctx, PAD, y, W - PAD * 2, ROW_H, 16, true, false);
+                shadowOff();
+                ctx.strokeStyle = '#F3F4F6'; ctx.lineWidth = 1;
+                roundRect(ctx, PAD, y, W - PAD * 2, ROW_H, 16, false, true);
+
+                ctx.fillStyle = 'rgba(105,70,237,0.10)';
+                roundRect(ctx, PAD + 10, y + 10, 28, 28, 12, true, false);
+                drawIcon(r.icon, PAD + 10 + 6, y + 10 + 6, 16, C.purple, 2.5);
+
+                const tx = PAD + 10 + 28 + 12;
+                const label = styleText(String(r.text));
+                drawFit(label, tx, y + ROW_H / 2 + 0.5, (W - PAD) - 12 - tx, 700, 12, 8, hasGeo(label) ? 0.02 : 0.05, C.black);
+            });
+
+            // CTA
+            const ctaY = H - PAD - CTA_H;
+            shadowOn(10, 6, 0.10);
+            ctx.fillStyle = C.black;
+            roundRect(ctx, PAD, ctaY, W - PAD * 2, CTA_H, 16, true, false);
+            shadowOff();
+            ctx.font = FONT(800, 12);
+            ctx.fillStyle = C.white;
+            drawSpaced(LABEL_CTA.toUpperCase(), PAD + 20, ctaY + CTA_H / 2 + 0.5, 1.2);
+            const cx = W - PAD - 20 - 14, cy = ctaY + CTA_H / 2;
+            ctx.fillStyle = C.lime;
+            ctx.beginPath(); ctx.arc(cx, cy, 14, 0, Math.PI * 2); ctx.fill();
+            drawIcon(ICON_ARROW, cx - 8, cy - 8, 16, C.black, 3);
+
+            // --- შუა ბლოკი: სათაური + კომპანია (ლოგო+სახელი) + საკვანძო სიტყვები ---
+            const midBottom = rowsTop - 16;                 // შუა ბლოკის ქვედა საზღვარი (ბარათებამდე, mb-4=16px template-ის მიხედვით)
+            const midTopLimit = PAD + 31 + 24;               // ზედა ხაზის შემდეგ
+
+            // საკვანძო სიტყვების მაღლა-ზომის გამოთვლა (მაქს. 3 ჩიპი, საჭიროებისამებრ იჭერს ხაზს)
+            const chipTags = keywords.slice(0, 3).map(t => `#${styleText(String(t))}`);
+            const CHIP_H = 22, CHIP_GAP = 6, CHIP_FONT = 10;
+            let chipLines = [[]];
+            if (chipTags.length) {
+                ctx.font = FONT(700, CHIP_FONT);
+                let lineW = 0, li = 0;
+                chipTags.forEach(tag => {
+                    const w = ctx.measureText(tag).width + 20;
+                    if (lineW + w > W - PAD * 2 && lineW > 0) { li++; chipLines[li] = []; lineW = 0; }
+                    chipLines[li].push({ tag, w });
+                    lineW += w + CHIP_GAP;
+                });
+            } else { chipLines = []; }
+            const chipsH = chipLines.length ? chipLines.length * CHIP_H + (chipLines.length - 1) * CHIP_GAP : 0;
+
+            // კომპანიის ბარათი (ლოგო/ავატარი + სახელი) — px-3 py-1.5, ლოგო w-5 h-5 (20px), gap-2.5 (10px)
+            const COMP_H = 32, COMP_PAD_X = 12, COMP_PAD_Y = 6;
+            const companyName = styleText(String(job.company_name || 'talantebi.ge'));
+            ctx.font = FONT(800, 11.5);
+            const compTextW = Math.min(spacedW(companyName, hasGeo(companyName) ? 0.1 : 0.3), 250);
+            const compW = COMP_PAD_X * 2 + 20 + 10 + compTextW + 4;
+
+            const gapCompChips = chipLines.length ? 14 : 0;    // gap-3 (12) + pt-0.5 (2) ტემპლეიტის მიხედვით
+            const gapTitleComp = 12;                            // gap-3 ტემპლეიტის მიხედვით
+            const compBlockH = COMP_H + gapCompChips + chipsH;
+
+            // სათაურის ზომის შერჩევა (მაქს. სივრცის ფარგლებში — my-auto-სთვის საჭირო მაქსიმალური ბიუჯეტი)
+            const maxTitleW = W - PAD * 2;
+            let rawTitle = String(job.title || 'ვაკანსია').trim().replace(/\s+/g, ' ');
+            if (!hasGeo(rawTitle)) rawTitle = rawTitle.toUpperCase();
+            const titleGeo = hasGeo(rawTitle);
+            let tSize = 54, tLines = [rawTitle], tLineH = 57, tSp = 0;
+            const wrap = (size) => {
+                ctx.font = FONT(800, size);
+                const sp = titleGeo ? 0 : -0.03 * size;
+                const words = rawTitle.split(' ');
+                const lines = []; let line = '';
+                words.forEach(w => {
+                    const test = line ? line + ' ' + w : w;
+                    if (line && spacedW(test, sp) > maxTitleW) { lines.push(line); line = w; }
+                    else line = test;
+                });
+                lines.push(line);
+                return { lines, sp, widest: Math.max(...lines.map(l => spacedW(l, sp))) };
+            };
+            const availableForTitle = (midBottom - midTopLimit) - gapTitleComp - compBlockH; // მთლიანი თავისუფალი სივრცე სათაურისთვის
+            for (let s = 54; s >= 22; s--) {
+                const res = wrap(s);
+                const lh = s * (titleGeo ? 1.1 : 1.05);   // template: leading-[1.05]
+                tSize = s; tLines = res.lines; tSp = res.sp; tLineH = lh;
+                if (res.widest <= maxTitleW && res.lines.length <= 3 && res.lines.length * lh <= availableForTitle) break;
+            }
+
+            // "my-auto": მთელი შუა ბლოკი (სათაური+კომპანია+თეგები) ცენტრირდება
+            // ზედა ხაზსა (midTopLimit) და ქვედა ბარათებს (midBottom) შორის — ზუსტად ისე, როგორც
+            // ტემპლეიტში `my-auto`-ს ექნებოდა ეფექტი
+            const middleBlockH = tLines.length * tLineH + gapTitleComp + compBlockH;
+            const freeSpace = Math.max(0, (midBottom - midTopLimit) - middleBlockH);
+            const blockTop = midTopLimit + freeSpace / 2;
+            const titleBottom = blockTop + tLines.length * tLineH;
+
+            ctx.font = FONT(800, tSize);
+            ctx.fillStyle = C.black;
+            const titleTop = blockTop;
+            tLines.forEach((l, i) => drawSpaced(l, PAD, titleTop + i * tLineH + tLineH / 2, tSp));
+
+            // კომპანიის ბარათის დახატვა (ლოგო + სახელი) — px-3 py-1.5, ლოგო 20x20, gap-2.5 (10px)
+            const compY = titleBottom + gapTitleComp;
+            shadowOn(2, 1, 0.05);
+            ctx.fillStyle = 'rgba(255,255,255,0.9)';
+            roundRect(ctx, PAD, compY, compW, COMP_H, COMP_H / 2, true, false);
+            shadowOff();
+            ctx.strokeStyle = 'rgba(229,231,235,0.9)'; ctx.lineWidth = 1;
+            roundRect(ctx, PAD, compY, compW, COMP_H, COMP_H / 2, false, true);
+
+            const logoSize = 20;
+            const logoX = PAD + COMP_PAD_X, logoY = compY + COMP_PAD_Y;
+            if (logoImg) {
+                ctx.save();
+                roundRect(ctx, logoX, logoY, logoSize, logoSize, 7, false, false);
+                ctx.clip();
+                ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+                ctx.restore();
+            } else {
+                ctx.fillStyle = C.black;
+                roundRect(ctx, logoX, logoY, logoSize, logoSize, 7, true, false);
+                ctx.fillStyle = C.white;
+                ctx.font = FONT(800, 10);
+                ctx.textAlign = 'center';
+                ctx.fillText((job.company_name || 'T').trim().charAt(0).toUpperCase(), logoX + logoSize / 2, logoY + logoSize / 2 + 1);
+                ctx.textAlign = 'left';
+            }
+            drawFit(companyName, logoX + logoSize + 10, compY + COMP_H / 2 + 0.5, compTextW + 2, 800, 11.5, 8, hasGeo(companyName) ? 0.1 : 0.3, C.black);
+
+            // საკვანძო სიტყვების ჩიპები
+            if (chipLines.length) {
+                let cy2 = compY + COMP_H + gapCompChips;
+                chipLines.forEach(line => {
+                    let cx2 = PAD;
+                    line.forEach(({ tag, w }) => {
+                        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                        roundRect(ctx, cx2, cy2, w, CHIP_H, 8, true, false);
+                        ctx.strokeStyle = 'rgba(229,231,235,0.7)'; ctx.lineWidth = 1;
+                        roundRect(ctx, cx2, cy2, w, CHIP_H, 8, false, true);
+                        ctx.font = FONT(700, CHIP_FONT);
+                        ctx.fillStyle = '#374151';
+                        ctx.fillText(tag, cx2 + 10, cy2 + CHIP_H / 2 + 0.5);
+                        cx2 += w + CHIP_GAP;
+                    });
+                    cy2 += CHIP_H + CHIP_GAP;
+                });
+            }
+
+            ctx.restore();
+
+            // Download File
+            const link = document.createElement('a');
+            const safeName = (job.title || 'vakansia').replace(/[^a-zA-Z0-9ა-ჰ_\-]+/g, '_');
+            link.download = `${safeName}_Story.png`;
+            link.href = canvas.toDataURL('image/png', 1.0);
+            link.click();
+        }
+
+        // Floating Social Widget — სკროლზე Fade ანიმაციით იცვლება სოციალური ქსელები
+        function FloatingSocialWidget() {
+            const socials = [
+                { name: 'Facebook', icon: 'fa-brands fa-facebook-f', url: 'https://www.facebook.com/profile.php?id=100063601672927', bg: 'bg-[#1877F2] hover:bg-[#145dc4]', shadow: 'shadow-blue-500/30' },
+                { name: 'Instagram', icon: 'fa-brands fa-instagram', url: 'https://www.instagram.com/talantebi.ge/', bg: 'bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 hover:opacity-90', shadow: 'shadow-pink-500/30' },
+                { name: 'TikTok', icon: 'fa-brands fa-tiktok', url: 'https://www.tiktok.com/@www.talantebi.ge', bg: 'bg-slate-900 hover:bg-black', shadow: 'shadow-slate-900/30' },
+                { name: 'LinkedIn', icon: 'fa-brands fa-linkedin-in', url: 'https://www.linkedin.com/company/18890424/', bg: 'bg-[#0A66C2] hover:bg-[#084e96]', shadow: 'shadow-blue-700/30' },
+            ];
+            const [index, setIndex] = useState(0);
+            const [fading, setFading] = useState(false);
+            const scrollAccum = React.useRef(0);
+            const lastScrollY = React.useRef(window.scrollY);
+            const fadeTimer = React.useRef(null);
+
+            useEffect(() => {
+                function onScroll() {
+                    const y = window.scrollY;
+                    scrollAccum.current += Math.abs(y - lastScrollY.current);
+                    lastScrollY.current = y;
+                    if (scrollAccum.current > 160) {
+                        scrollAccum.current = 0;
+                        setFading(true);
+                        clearTimeout(fadeTimer.current);
+                        fadeTimer.current = setTimeout(() => {
+                            setIndex(i => (i + 1) % socials.length);
+                            setFading(false);
+                        }, 220);
+                    }
+                }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                return () => { window.removeEventListener('scroll', onScroll); clearTimeout(fadeTimer.current); };
+            }, []);
+
+            const current = socials[index];
+
+            return (
+                <a
+                    href={current.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={current.name}
+                    className={`relative flex items-center justify-center w-11 h-11 sm:w-13 sm:h-13 text-white rounded-full shadow-lg active:scale-95 transition-colors duration-300 overflow-hidden ${current.bg} ${current.shadow}`}
+                >
+                    <i className={`${current.icon} text-lg sm:text-xl transition-all duration-200 ${fading ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`}></i>
+                </a>
+            );
+        }
+
+        // Header Navigation Component
+        function Navigation({ currentPage, setCurrentPage }) {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            function handleNavClick(page) {
+                setMobileMenuOpen(false);
+                window.location.hash = page === 'home' ? '' : page;
+                setCurrentPage(page); // პირდაპირ ვცვლით state-საც, რადგან URL hash შეიძლება უკვე იგივე იყოს
+                    // (მაგ. ვაკანსიის დეტალურ გვერდზე hash არ იცვლება ბარათზე დაჭერისას),
+                    // და მხოლოდ hash-ზე დაყრდნობამ შეიძლება ნავიგაცია "ჩაკლას"
+            }
+
+            return (
+                <header className="sticky top-0 z-40 backdrop-blur-xl bg-white/90 border-b border-slate-200/80 transition-all w-full">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between w-full">
+                        <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className="flex items-center gap-2.5 group">
+                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-purple-400 flex items-center justify-center text-white font-black text-lg sm:text-xl shadow-md shadow-brand-500/30">
+                                ტ
+                            </div>
+                            <div>
+                                <span className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900">Talantebi<span className="text-brand-600">.ge</span></span>
+                                <span className="hidden sm:block text-[10px] uppercase font-bold tracking-widest text-slate-400">კარიერული პლატფორმა</span>
+                            </div>
+                        </a>
+
+                        <div className="flex items-center gap-2 sm:gap-4">
+                            <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                                <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className={`hover:text-brand-600 transition-colors ${currentPage === 'home' ? 'text-brand-600 font-bold' : ''}`}>ვაკანსიები</a>
+                            </nav>
+
+                            <button onClick={() => handleNavClick('post-job')} className="relative group overflow-hidden rounded-full bg-slate-900 px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-md hover:bg-brand-600 transition-all duration-300 active:scale-95 flex items-center gap-1.5 whitespace-nowrap">
+                                <i className="fa-solid fa-plus text-[10px] sm:text-xs"></i> <span>დამატება</span>
+                            </button>
+
+                            <button className="md:hidden p-2 text-slate-700 hover:text-brand-600" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                                <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'} text-xl`}></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    {mobileMenuOpen && (
+                        <div className="md:hidden bg-white border-b border-slate-200 px-4 py-4 flex flex-col gap-3 shadow-xl">
+                            <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className="py-2.5 text-slate-800 font-bold border-b border-slate-100 flex items-center gap-2"><i className="fa-solid fa-briefcase text-brand-600 text-sm"></i> ვაკანსიები</a>
+                        </div>
+                    )}
+                </header>
+            );
+        }
+
+        // ელფოსტის მისამართი ტექსტში — გამოყოფილი ფონით + ხაზგასმით, დაწკაპუნებაზე კოპირდება
+        function EmailHighlight({ email }) {
+            const [copied, setCopied] = useState(false);
+            function handleCopy(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                navigator.clipboard.writeText(email).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                }).catch(() => {});
+            }
+            return (
+                <span onClick={handleCopy} title="დააწკაპუნეთ დასაკოპირებლად" className="relative inline-flex items-center bg-brand-50 text-brand-700 underline decoration-brand-300 underline-offset-2 font-semibold px-1.5 py-0.5 rounded-md cursor-pointer hover:bg-brand-100 transition-colors break-all">
+                    {email}
+                    {copied && (
+                        <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-md whitespace-nowrap shadow-lg z-10">
+                            დაკოპირდა ✓
+                        </span>
+                    )}
+                </span>
+            );
+        }
+
+        // ვაკანსიის მეილზე "გაგზავნა/დაკოპირება" ღილაკი — მობილურზე mailto, დესკტოპზე copy-to-clipboard
+        function ApplyButton({ job, className }) {
+            const [copied, setCopied] = useState(false);
+            const isMobile = React.useMemo(() => /Android|iPhone|iPad|iPod|Mobile|webOS/i.test(navigator.userAgent), []);
+
+            if (!job.contact_email) return null;
+
+            if (isMobile) {
+                const subject = `${job.title} - Talantebi.ge`;
+                const mailtoHref = `mailto:${job.contact_email}?subject=${encodeURIComponent(subject)}`;
+                return (
+                    <a href={mailtoHref} className={className}>
+                        <i className="fa-solid fa-paper-plane"></i> რეზიუმეს გაგზავნა
+                    </a>
+                );
+            }
+
+            function handleCopyClick(e) {
+                e.preventDefault();
+                navigator.clipboard.writeText(job.contact_email).then(() => {
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                }).catch(() => {});
+            }
+
+            return (
+                <button onClick={handleCopyClick} className={className}>
+                    <i className={`fa-solid ${copied ? 'fa-check' : 'fa-copy'}`}></i>
+                    {copied ? 'მეილი დაკოპირდა! ✓' : 'მეილის დაკოპირება'}
+                </button>
+            );
+        }
+
+        function linkifyText(text) {
+            if (!text) return text;
+            const emailRegex = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+            const urlRegex = /((?:https?:\/\/|www\.)[^\s<>"')\]]+)/gi;
+
+            function linkifyUrls(part, keyPrefix) {
+                const urlParts = String(part).split(urlRegex);
+                return urlParts.map((p, j) => {
+                    const isUrl = j % 2 === 1;
+                    if (isUrl && p) {
+                        const trailingMatch = p.match(/[.,;:!?)]+$/);
+                        const trailing = trailingMatch ? trailingMatch[0] : '';
+                        const cleanUrl = trailing ? p.slice(0, -trailing.length) : p;
+                        const href = cleanUrl.startsWith('http') ? cleanUrl : `https://${cleanUrl}`;
+                        return (
+                            <React.Fragment key={`${keyPrefix}-u${j}`}>
+                                <a href={href} target="_blank" rel="noopener noreferrer" className="text-brand-600 underline hover:text-brand-700 break-all font-semibold">
+                                    {cleanUrl}
+                                </a>
+                                {trailing}
+                            </React.Fragment>
+                        );
+                    }
+                    return <React.Fragment key={`${keyPrefix}-u${j}`}>{p}</React.Fragment>;
+                });
+            }
+
+            const emailParts = String(text).split(emailRegex);
+            return emailParts.map((part, i) => {
+                const isEmail = i % 2 === 1;
+                if (isEmail) return <EmailHighlight key={`e${i}`} email={part} />;
+                return linkifyUrls(part, `p${i}`);
+            });
+        }
+
+        // Job Card Component
+        function JobCard({ job, onClick, viewMode }) {
+            const [isSharing, setIsSharing] = useState(false);
+
+            function formatDate(dateStr) {
+                if (!dateStr) return '';
+                const date = new Date(dateStr);
+                const monthNames = ['იან', 'თებ', 'მარ', 'აპრ', 'მაი', 'ივნ', 'ივლ', 'აგვ', 'სექ', 'ოქტ', 'ნოე', 'დეკ'];
+                return `${date.getDate()} ${monthNames[date.getMonth()]}`;
+            }
+
+            const keywords = job.keywords 
+                ? job.keywords.split(',').map(k => k.trim().replace(/^#+/, '')).filter(k => k) 
+                : [];
+            const locationText = job.location || 'თბილისი';
+
+            async function handleShareClick(e) {
+                e.stopPropagation();
+                if (isSharing) return;
+                setIsSharing(true);
+                try {
+                    await generateStoryImage(job);
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    setIsSharing(false);
+                }
+            }
+
+            const ShareIcon = () => (
+                isSharing
+                    ? <i className="fa-solid fa-spinner fa-spin"></i>
+                    : <i className="fa-solid fa-share-nodes"></i>
+            );
+
+            if (viewMode === 'line') {
+                return (
+                    <div onClick={onClick} className="group bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all duration-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 cursor-pointer w-full">
+                        <div className="flex items-start sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+                            <img src={job.logo_url || 'https://via.placeholder.com/56'} alt={job.company_name} className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl object-contain bg-slate-50 border border-slate-100 p-1.5 shrink-0 shadow-sm group-hover:scale-105 transition-transform" />
+                            <div className="min-w-0 flex-1">
+                                <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-2 leading-snug">{job.title}</h3>
+                                <p className="text-xs font-semibold text-slate-500 mt-1 flex flex-wrap items-center gap-1.5">
+                                    <span>{job.company_name}</span>
+                                    <span className="text-slate-300">•</span>
+                                    <span className="text-brand-600 font-bold">{locationText}</span>
+                                    {job.industry && (
+                                        <>
+                                            <span className="text-slate-300 hidden sm:inline">•</span>
+                                            <span className="text-slate-400 font-normal hidden sm:inline">{job.industry}</span>
+                                        </>
+                                    )}
+                                </p>
+                                {keywords.length > 0 && (
+                                    <div className="flex flex-wrap items-center gap-1.5 mt-2">
+                                        {keywords.slice(0, 4).map((t, idx) => (
+                                            <span key={idx} className="px-2.5 py-1 bg-brand-50 text-brand-700 rounded-full text-[10px] sm:text-[11px] font-bold whitespace-nowrap">#{t}</span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="flex items-center justify-between md:justify-end gap-2 sm:gap-3 w-full md:w-auto pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
+                            <div className="text-left md:text-right">
+                                <span className="block text-[11px] sm:text-xs font-bold text-slate-500">{formatDate(job.posted_date || job.created_at)}</span>
+                                <span className="text-[10px] sm:text-[11px] text-slate-400 block">{job.deadline ? `ვადა: ${formatDate(job.deadline)}` : ''}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button onClick={handleShareClick} disabled={isSharing} title="Story PNG გადმოწერა" className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center text-xs transition-colors shrink-0 disabled:opacity-60">
+                                    <ShareIcon />
+                                </button>
+                                <button className="px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl sm:rounded-2xl bg-slate-900 text-white text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm shrink-0">
+                                    ნახვა
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            // Grid Mode
+            return (
+                <div onClick={onClick} className="group bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:border-brand-300 transition-all duration-300 flex flex-col justify-between cursor-pointer w-full">
+                    <div>
+                        <div className="flex items-center justify-between mb-3.5">
+                            <img src={job.logo_url || 'https://via.placeholder.com/48'} alt={job.company_name} className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl object-contain bg-slate-50 border border-slate-100 p-1.5 shadow-sm group-hover:scale-105 transition-transform" />
+                            <span className="px-2.5 py-1 rounded-full bg-brand-50 text-brand-700 text-[11px] sm:text-xs font-bold">{job.industry || 'ვაკანსია'}</span>
+                        </div>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-brand-600 transition-colors line-clamp-2 leading-snug">{job.title}</h3>
+                        <p className="text-xs font-semibold text-slate-500 mt-1">{job.company_name} • <span className="text-brand-600 font-bold">{locationText}</span></p>
+                        
+                        <div className="flex flex-wrap gap-1.5 mt-3.5">
+                            {keywords.slice(0, 4).map((t, idx) => (
+                                <span key={idx} className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-slate-100 text-slate-600 rounded-full text-[11px] font-medium">#{t}</span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span className="block text-[11px] sm:text-xs font-bold text-slate-500">{formatDate(job.posted_date || job.created_at)}</span>
+                            <span className="text-[10px] text-slate-400 block">{job.deadline ? `ვადა: ${formatDate(job.deadline)}` : ''}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                            <button onClick={handleShareClick} disabled={isSharing} title="Story PNG გადმოწერა" className="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 hover:bg-brand-50 hover:text-brand-600 flex items-center justify-center text-xs transition-colors disabled:opacity-60">
+                                <ShareIcon />
+                            </button>
+                            <button className="px-3.5 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-brand-600 transition-colors shadow-sm">
+                                დეტალები
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+
+        // Home Page Component
+        function HomePage({ setCurrentPage, setSelectedJob }) {
+            const [jobs, setJobs] = useState([]);
+            const [loading, setLoading] = useState(true);
+            const [viewMode, setViewMode] = useState('line');
+            const [filters, setFilters] = useState({ search: '', location: '', industry: '', company: '' });
+
+            useEffect(() => { loadJobs(); }, []);
+
+            async function loadJobs() {
+                try {
+                    const todayStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+                    const { data, error } = await supabaseClient
+                        .from('vacancies')
+                        .select('*')
+                        .eq('is_approved', true)
+                        .or(`deadline.is.null,deadline.gte.${todayStr}`) // ვადაგასული ვაკანსიები არ ჩანს, თუნდაც ავტომატური წაშლა ჯერ არ მომხდარა
+                        .order('created_at', { ascending: false });
+
+                    if (error) throw error;
+                    setJobs(data || []);
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    setLoading(false);
+                }
+            }
+
+            function handleFilterChange(field, value) {
+                setFilters(prev => ({ ...prev, [field]: value }));
+            }
+
+            function clearFilters() {
+                setFilters({ search: '', location: '', industry: '', company: '' });
+            }
+
+            function filterByCompany(name) {
+                setFilters(prev => ({ ...prev, company: prev.company === name ? '' : name }));
+                document.getElementById('vacancies-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // აქტიური ვაკანსიების მქონე უნიკალური კომპანიების სია (ლოგოთი), Marquee-სთვის
+            const companies = React.useMemo(() => {
+                const map = new Map();
+                jobs.forEach(j => {
+                    if (j.company_name && !map.has(j.company_name)) {
+                        map.set(j.company_name, j.logo_url || '');
+                    }
+                });
+                return Array.from(map, ([name, logo]) => ({ name, logo }));
+            }, [jobs]);
+
+            const filteredJobs = jobs.filter(job => {
+                if (filters.search) {
+                    const q = filters.search.toLowerCase();
+                    const m = job.title.toLowerCase().includes(q) || job.company_name.toLowerCase().includes(q) || (job.description && job.description.toLowerCase().includes(q));
+                    if (!m) return false;
+                }
+                if (filters.location && filters.location !== 'ყველა ლოკაცია') {
+                    if ((job.location || 'თბილისი') !== filters.location) return false;
+                }
+                if (filters.industry && job.industry !== filters.industry) return false;
+                if (filters.company && job.company_name !== filters.company) return false;
+                return true;
+            });
+
+            return (
+                <div className="flex-1 flex flex-col w-full overflow-x-hidden">
+                    {/* Hero Section */}
+                    <section className="relative pt-8 sm:pt-16 pb-8 sm:pb-12 overflow-hidden bg-gradient-to-b from-white via-[#fcfbfe] to-[#faf9fc] w-full px-4">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-brand-500/10 via-purple-300/10 to-accent-jasmine/20 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+                        
+                        <div className="max-w-7xl mx-auto text-center">
+                            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight max-w-3xl mx-auto leading-tight px-2">
+                                იპოვე შენი შემდეგი <span className="bg-gradient-to-r from-brand-600 via-purple-500 to-indigo-600 bg-clip-text text-transparent">კარიერული შესაძლებლობა</span>
+                            </h1>
+
+                            {/* Search & Filter Bar */}
+                            <div className="mt-6 sm:mt-10 max-w-4xl mx-auto bg-white p-2.5 sm:p-3 rounded-2xl sm:rounded-3xl shadow-lg shadow-slate-200/50 border border-slate-200/80 flex flex-col md:flex-row gap-2.5 sm:gap-3 items-center w-full">
+                                <div className="flex items-center gap-2.5 px-3.5 py-2.5 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl w-full border border-slate-100 focus-within:border-brand-500 transition-colors">
+                                    <i className="fa-solid fa-magnifying-glass text-slate-400 text-sm"></i>
+                                    <input type="text" placeholder="პოზიცია, უნარი ან კომპანია..." value={filters.search} onChange={(e) => handleFilterChange('search', e.target.value)} className="bg-transparent border-none outline-none w-full text-slate-800 text-xs sm:text-sm placeholder-slate-400 font-medium" />
+                                </div>
+
+                                <div className="w-full md:w-48 flex items-center gap-2 px-3.5 py-2.5 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-100">
+                                    <i className="fa-solid fa-location-dot text-slate-400 text-sm"></i>
+                                    <select value={filters.location} onChange={(e) => handleFilterChange('location', e.target.value)} className="bg-transparent border-none outline-none w-full text-slate-800 text-xs sm:text-sm font-medium cursor-pointer">
+                                        {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+
+                                <div className="w-full md:w-56 flex items-center gap-2 px-3.5 py-2.5 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-100">
+                                    <i className="fa-solid fa-briefcase text-slate-400 text-sm"></i>
+                                    <select value={filters.industry} onChange={(e) => handleFilterChange('industry', e.target.value)} className="bg-transparent border-none outline-none w-full text-slate-800 text-xs sm:text-sm font-medium cursor-pointer">
+                                        <option value="">ყველა ინდუსტრია</option>
+                                        {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
+                                    </select>
+                                </div>
+
+                                <button onClick={clearFilters} className="px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-slate-100 text-slate-700 text-xs sm:text-sm font-bold hover:bg-slate-200 transition-colors whitespace-nowrap w-full md:w-auto">
+                                    გასუფთავება
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Partner Companies Marquee — დინამიურად Supabase-დან */}
+                        {companies.length > 0 && (
+                            <div className="mt-10 sm:mt-16 pt-6 pb-2 border-t border-slate-100 overflow-hidden bg-white/50 w-full">
+                                <p className="text-center text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+                                    პარტნიორი კომპანიები
+                                    {filters.company && (
+                                        <button onClick={() => handleFilterChange('company', '')} className="ml-2 text-brand-600 normal-case tracking-normal hover:underline">
+                                            · ფილტრი: {filters.company} ✕
+                                        </button>
+                                    )}
+                                </p>
+                                <div className="relative w-full overflow-hidden">
+                                    <div className="absolute left-0 inset-y-0 w-12 sm:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                                    <div className="absolute right-0 inset-y-0 w-12 sm:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+                                    <div className="animate-marquee flex items-center gap-3 sm:gap-4 whitespace-nowrap">
+                                        {[...companies, ...companies].map((c, idx) => (
+                                            <button
+                                                key={c.name + idx}
+                                                onClick={() => filterByCompany(c.name)}
+                                                title={`მხოლოდ ${c.name}-ის ვაკანსიები`}
+                                                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border shadow-sm text-xs font-bold transition-colors shrink-0 ${filters.company === c.name ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-100 text-slate-700 hover:border-brand-300 hover:text-brand-700'}`}
+                                            >
+                                                {c.logo ? (
+                                                    <img src={c.logo} alt={c.name} className="w-5 h-5 rounded object-contain bg-white" />
+                                                ) : (
+                                                    <span className="w-5 h-5 rounded bg-brand-100 text-brand-700 flex items-center justify-center text-[10px] font-black">{c.name.charAt(0).toUpperCase()}</span>
+                                                )}
+                                                {c.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </section>
+
+                    {/* Main Vacancies Section */}
+                    <main id="vacancies-section" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 sm:mb-8">
+                            <div>
+                                <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900">აქტიური ვაკანსიები</h2>
+                                <p className="text-xs sm:text-sm text-slate-500 mt-0.5">ნაპოვნია {filteredJobs.length} შეთავაზება</p>
+                            </div>
+
+                            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+                                {/* WhatsApp Subscription Button */}
+                                <a
+                                    href="https://chat.whatsapp.com/KGKkMibJ1ALF1BOub2vAfN"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="whatsapp-button"
+                                >
+                                    <span className="bell-wrap">
+                                        <svg className="bell-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                                            <path d="M10 21h4"/>
+                                        </svg>
+                                        <span className="status-dot"></span>
+                                    </span>
+                                    <span>მიიღე ვაკანსიები WhatsApp-ში</span>
+                                    <svg className="whatsapp-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <path d="M20.5 11.2a8.5 8.5 0 0 1-12.7 7.4L4 20l1.5-3.6A8.5 8.5 0 1 1 20.5 11.2Z"/>
+                                        <path d="M8.8 8.6c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.6 1.4c.1.3.1.5-.1.7l-.5.6c.6 1.1 1.4 1.9 2.5 2.4l.6-.6c.2-.2.4-.2.7-.1l1.4.6c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.4.3-1 .4-1.5.2-2.9-.8-5.2-3-6-5.8-.2-.5-.1-1.1.1-1.5Z"/>
+                                    </svg>
+                                </a>
+
+                                {/* View Switcher */}
+                                <div className="inline-flex p-1 bg-slate-200/70 rounded-xl items-center self-start sm:self-auto shadow-inner">
+                                    <button onClick={() => setViewMode('line')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${viewMode === 'line' ? 'bg-white text-brand-700 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}>
+                                        <i className="fa-solid fa-bars-staggered"></i> სია
+                                    </button>
+                                    <button onClick={() => setViewMode('grid')} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${viewMode === 'grid' ? 'bg-white text-brand-700 shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}>
+                                        <i className="fa-solid fa-border-all"></i> ბადე
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {loading ? (
+                            <div className="text-center py-16 text-slate-400 font-semibold text-sm">იტვირთება ვაკანსიები...</div>
+                        ) : filteredJobs.length === 0 ? (
+                            <div className="text-center py-16 bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm p-4">
+                                <div className="w-12 h-12 bg-brand-50 text-brand-600 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                                    <i className="fa-solid fa-face-frown"></i>
+                                </div>
+                                <h3 className="text-base font-bold text-slate-800">ვაკანსიები ვერ მოიძებნა</h3>
+                                <p className="text-xs text-slate-500 mt-1">სცადეთ სხვა საძიებო ფილტრები.</p>
+                            </div>
+                        ) : (
+                            <div className={viewMode === 'line' ? "space-y-3 sm:space-y-4 w-full" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full"}>
+                                {filteredJobs.map(job => (
+                                    <JobCard key={job.id} job={job} viewMode={viewMode} onClick={() => { setSelectedJob(job); setCurrentPage('job-detail'); window.location.hash = 'vacancy/' + job.id; }} />
+                                ))}
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        // Job Detail Page Component
+        function JobDetailPage({ job, setCurrentPage }) {
+            const keywords = job.keywords 
+                ? job.keywords.split(',').map(k => k.trim().replace(/^#+/, '')).filter(k => k) 
+                : [];
+
+            return (
+                <div className="w-full">
+                    {/* Full-width hero banner — აღარ არის "ბარათი", სრული გვერდის შეგრძნებისთვის */}
+                    <div className="w-full bg-gradient-to-br from-brand-50 via-white to-purple-50 border-b border-slate-200/80">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+                            <button onClick={() => setCurrentPage('home')} className="mb-5 sm:mb-8 px-3.5 py-2 bg-white hover:bg-slate-50 text-slate-700 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 border border-slate-200 shadow-sm">
+                                <i className="fa-solid fa-arrow-left"></i> უკან დაბრუნება
+                            </button>
+
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 sm:gap-6">
+                                <div className="flex items-start sm:items-center gap-4 sm:gap-5">
+                                    <img src={job.logo_url || 'https://via.placeholder.com/96'} alt={job.company_name} className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl object-contain bg-white border border-slate-100 p-2.5 sm:p-3.5 shadow-md shrink-0" />
+                                    <div>
+                                        <span className="px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-700 text-[11px] sm:text-xs font-bold">{job.industry || 'ვაკანსია'}</span>
+                                        <h1 className="text-xl sm:text-4xl font-extrabold text-slate-900 mt-1.5 leading-snug">{job.title}</h1>
+                                        <p className="text-xs sm:text-base font-semibold text-slate-500 mt-1">{job.company_name} • <span className="text-brand-600 font-bold">{job.location || 'თბილისი'}</span></p>
+                                    </div>
+                                </div>
+                                <ApplyButton job={job} className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm shadow-lg shadow-brand-500/30 transition-colors shrink-0 whitespace-nowrap" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* კონტენტი — ფართო, ორსვეტიანი დიდ ეკრანებზე */}
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 items-start">
+                        {/* მთავარი კონტენტი */}
+                        <div className="lg:col-span-2 order-2 lg:order-1">
+                            {keywords.length > 0 && (
+                                <div className="mb-6 flex flex-wrap gap-1.5 sm:gap-2">
+                                    {keywords.map((k, idx) => (
+                                        <span key={idx} className="px-2.5 py-1 bg-slate-100 text-slate-600 rounded-full text-[11px] sm:text-xs font-semibold">#{k}</span>
+                                    ))}
+                                </div>
+                            )}
+
+                            <div className="prose max-w-none text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
+                                <h3 className="text-base sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4">ვაკანსიის აღწერა</h3>
+                                {linkifyText(job.description)}
+                            </div>
+
+                            {job.contact_email ? (
+                                <div className="mt-10 pt-8 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div>
+                                        <h4 className="text-sm sm:text-lg font-bold text-slate-900">დაინტერესდით ვაკანსიით?</h4>
+                                        <p className="text-[11px] sm:text-sm text-slate-500 mt-0.5">გაგზავნეთ თქვენი CV პირდაპირ {job.company_name}-ის საკონტაქტო ფოსტაზე</p>
+                                    </div>
+                                    <ApplyButton job={job} className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-7 sm:py-4 bg-brand-600 hover:bg-brand-700 text-white rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm shadow-lg shadow-brand-500/30 transition-colors shrink-0 whitespace-nowrap" />
+                                </div>
+                            ) : (
+                                <div className="mt-10 pt-8 border-t border-slate-200 text-[11px] sm:text-sm text-slate-400">
+                                    ამ ვაკანსიისთვის საკონტაქტო ელ-ფოსტა ვერ მოიძებნა. დარწმუნდით, რომ აღწერაში მითითებულია ელ-ფოსტის მისამართი.
+                                </div>
+                            )}
+                        </div>
+
+                        {/* გვერდითი პანელი — მეტა ინფორმაცია */}
+                        <div className="order-1 lg:order-2 lg:sticky lg:top-6">
+                            <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm p-5 sm:p-6 flex flex-col gap-4 sm:gap-5">
+                                <div className="flex items-center justify-between text-xs sm:text-sm">
+                                    <span className="font-bold text-slate-400 uppercase text-[10px] sm:text-xs">გამოქვეყნდა</span>
+                                    <span className="font-bold text-slate-800">{job.posted_date || 'ახალი'}</span>
+                                </div>
+                                {job.deadline && (
+                                    <div className="flex items-center justify-between text-xs sm:text-sm">
+                                        <span className="font-bold text-slate-400 uppercase text-[10px] sm:text-xs">ბოლო ვადა</span>
+                                        <span className="font-bold text-rose-600">{job.deadline}</span>
+                                    </div>
+                                )}
+                                <div className="flex items-center justify-between text-xs sm:text-sm">
+                                    <span className="font-bold text-slate-400 uppercase text-[10px] sm:text-xs">ლოკაცია</span>
+                                    <span className="font-bold text-slate-800">{job.location || 'თბილისი'}</span>
+                                </div>
+                                <div className="flex items-center justify-between text-xs sm:text-sm">
+                                    <span className="font-bold text-slate-400 uppercase text-[10px] sm:text-xs">კატეგორია</span>
+                                    <span className="font-bold text-slate-800">{job.industry || '—'}</span>
+                                </div>
+                                <ApplyButton job={job} className="mt-1 w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold text-xs sm:text-sm shadow-lg shadow-brand-500/30 transition-colors whitespace-nowrap" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Recruiters Page
+        function RecruitersPage({ setCurrentPage }) {
+            const [recruiters, setRecruiters] = useState([]);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => { loadRecruiters(); }, []);
+
+            async function loadRecruiters() {
+                try {
+                    const { data, error } = await supabaseClient.from('recruiters').select('*').eq('is_approved', true);
+                    if (error) throw error;
+                    setRecruiters(data || []);
+                } catch (e) { console.error(e); } finally { setLoading(false); }
+            }
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                        <div>
+                            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">პროფესიონალი რეკრუტერები</h1>
+                            <p className="text-slate-500 text-xs sm:text-sm mt-1">იპოვეთ თქვენი სფეროს ექსპერტი</p>
+                        </div>
+                        <button onClick={() => setCurrentPage('register-recruiter')} className="px-4 py-2 sm:px-5 sm:py-2.5 bg-brand-600 text-white rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-brand-700 shadow-md">
+                            გახდი რეკრუტერი
+                        </button>
+                    </div>
+
+                    {loading ? (
+                        <div className="text-center py-16 text-slate-400 font-semibold text-sm">იტვირთება...</div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            {recruiters.map(r => (
+                                <div key={r.id} onClick={() => window.location.hash = `recruiter/${r.id}`} className="bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all cursor-pointer">
+                                    <div className="flex items-center gap-3.5">
+                                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold text-lg sm:text-xl shrink-0">
+                                            {r.full_name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-base sm:text-lg font-bold text-slate-900">{r.full_name}</h3>
+                                            <p className="text-xs text-slate-500">{r.subtitle}</p>
+                                        </div>
+                                    </div>
+                                    <p className="text-xs text-slate-600 mt-3 line-clamp-2">{r.bio}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Talents Page
+        function TalentsPage() {
+            const [talents, setTalents] = useState([]);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => { loadTalents(); }, []);
+
+            async function loadTalents() {
+                try {
+                    const { data, error } = await supabaseClient.from('talents').select('*').eq('is_approved', true);
+                    if (error) throw error;
+                    setTalents(data || []);
+                } catch (e) { console.error(e); } finally { setLoading(false); }
+            }
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                        <div>
+                            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">ტალანტების ბაზა</h1>
+                            <p className="text-slate-500 text-xs sm:text-sm mt-1">აღმოაჩინე საუკეთესო კადრები</p>
+                        </div>
+                        <button onClick={() => window.location.hash = 'register-talent'} className="px-4 py-2 sm:px-5 sm:py-2.5 bg-brand-600 text-white rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-brand-700 shadow-md">
+                            დაამატე პროფილი
+                        </button>
+                    </div>
+
+                    {loading ? (
+                        <div className="text-center py-16 text-slate-400 font-semibold text-sm">იტვირთება...</div>
+                    ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                            {talents.map(t => (
+                                <div key={t.id} onClick={() => window.location.hash = `talent/${t.id}`} className="bg-white p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-xl transition-all cursor-pointer text-center">
+                                    <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xl sm:text-2xl mb-3 overflow-hidden">
+                                        {t.avatar_url ? <img src={t.avatar_url} alt={t.full_name} className="w-full h-full object-cover" /> : t.full_name.charAt(0)}
+                                    </div>
+                                    <h3 className="text-sm sm:text-base font-bold text-slate-900">{t.full_name}</h3>
+                                    <span className="text-[11px] sm:text-xs text-brand-600 font-semibold block mt-0.5">{t.industries}</span>
+                                    <p className="text-xs text-slate-500 mt-2 line-clamp-2">{t.summary}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Post Job Page Component
+        function extractEmailFromText(text) {
+            if (!text) return '';
+            const m = String(text).match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+            return m ? m[0] : '';
+        }
+
+        function PostJobPage() {
+            const initialFormState = {
+                title: '', 
+                company_name: '', 
+                logo_url: '', 
+                location: 'თბილისი', 
+                description: '', 
+                industry: '', 
+                keywords: '', 
+                deadline: ''
+            };
+            const [formData, setFormData] = useState(initialFormState);
+            const [msg, setMsg] = useState('');
+            const [loading, setLoading] = useState(false);
+
+            const detectedEmail = extractEmailFromText(formData.description);
+
+            async function handleSubmit(e) {
+                e.preventDefault();
+                setLoading(true);
+                try {
+                    const contact_email = extractEmailFromText(formData.description);
+                    const now = new Date();
+                    const { error } = await supabaseClient.from('vacancies').insert([{
+                        ...formData,
+                        contact_email,
+                        is_approved: false,
+                        // ხელით ვამატებთ, რომ "ახალი ზემოთ" სორტირება არ იყოს დამოკიდებული
+                        // Supabase-ის სვეტის default მნიშვნელობაზე, რომელიც შეიძლება არ იყოს დაყენებული
+                        created_at: now.toISOString(),
+                        posted_date: now.toISOString().slice(0, 10)
+                    }]);
+                    if (error) throw error;
+                    setMsg('ვაკანსია წარმატებით გაიგზავნა! გამოჩნდება ადმინისტრატორის დადასტურების შემდეგ.');
+                    setFormData(initialFormState);
+                } catch (err) { setMsg('შეცდომა: ' + err.message); } finally { setLoading(false); }
+            }
+
+            return (
+                <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12 w-full">
+                    <div className="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xl">
+                        <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mb-6">ვაკანსიის დამატება</h2>
+                        {msg && <div className="mb-4 p-3.5 bg-brand-50 text-brand-700 rounded-xl text-xs sm:text-sm font-bold">{msg}</div>}
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">პოზიციის დასახელება *</label>
+                                <input type="text" required value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium" />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">კომპანიის სახელი *</label>
+                                <input type="text" required value={formData.company_name} onChange={e => setFormData({...formData, company_name: e.target.value})} className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium" />
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">ლოკაცია *</label>
+                                    <select value={formData.location} onChange={e => setFormData({...formData, location: e.target.value})} className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium cursor-pointer">
+                                        {CITIES.filter(c => c !== 'ყველა ლოკაცია').map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">ინდუსტრია</label>
+                                    <select value={formData.industry} onChange={e => setFormData({...formData, industry: e.target.value})} className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium cursor-pointer">
+                                        <option value="">აირჩიეთ ინდუსტრია</option>
+                                        {INDUSTRIES.map(ind => <option key={ind} value={ind}>{ind}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">ლოგოს სურათის ბმული</label>
+                                    <input type="url" value={formData.logo_url} onChange={e => setFormData({...formData, logo_url: e.target.value})} placeholder="https://..." className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium" />
+                                </div>
+                                <div>
+                                    <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">ბოლო ვადა</label>
+                                    <div className="relative">
+                                        <input
+                                            type="date"
+                                            value={formData.deadline}
+                                            onChange={e => setFormData({...formData, deadline: e.target.value})}
+                                            onClick={e => { if (e.target.showPicker) { try { e.target.showPicker(); } catch (err) {} } }}
+                                            className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium cursor-pointer"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">საკვანძო უნარები / ხელფასი</label>
+                                <input type="text" value={formData.keywords} onChange={e => setFormData({...formData, keywords: e.target.value})} placeholder="React, Tailwind, Remote, 2500 GEL" className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium" />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">აღწერა *</label>
+                                <textarea rows="10" required value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} placeholder="ჩაწერეთ ვაკანსიის სრული აღწერა — საკონტაქტო ელ-ფოსტაც აქვე, ტექსტში მიუთითეთ (მაგ. hr@company.ge)" className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500 font-medium resize-y min-h-[220px] leading-relaxed"></textarea>
+                                {detectedEmail ? (
+                                    <p className="text-[11px] text-emerald-600 font-semibold mt-1.5 flex items-center gap-1.5">
+                                        <i className="fa-solid fa-circle-check"></i> საკონტაქტო ელ-ფოსტად ამოვიცანი: {detectedEmail}
+                                    </p>
+                                ) : (
+                                    <p className="text-[10px] text-slate-400 mt-1.5">აღწერაში მიუთითეთ საკონტაქტო ელ-ფოსტა — ის ავტომატურად ამოიცნობა და გამოყენებული იქნება ვაკანსიის გვერდზე "Apply" ღილაკისთვის.</p>
+                                )}
+                            </div>
+                            <button type="submit" disabled={loading} className="w-full py-3 sm:py-3.5 bg-brand-600 text-white rounded-xl sm:rounded-2xl font-bold hover:bg-brand-700 transition-colors shadow-lg shadow-brand-500/30 text-xs sm:text-sm">
+                                {loading ? 'იგზავნება...' : 'ვაკანსიის გამოქვეყნება'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+
+        // Admin Page
+        function AdminPage() {
+            const [isAuthenticated, setIsAuthenticated] = useState(false);
+            const [pass, setPass] = useState('');
+            const [vacancies, setVacancies] = useState([]);
+
+            async function loadAdminData() {
+                const { data } = await supabaseClient.from('vacancies').select('*').order('created_at', { ascending: false });
+                setVacancies(data || []);
+            }
+
+            function handleLogin(e) {
+                e.preventDefault();
+                if (pass === 'admin2025') {
+                    setIsAuthenticated(true);
+                    loadAdminData();
+                } else { alert('არასწორი პაროლი!'); }
+            }
+
+            async function approveVacancy(id) {
+                await supabaseClient.from('vacancies').update({ is_approved: true }).eq('id', id);
+                loadAdminData();
+            }
+
+            async function deleteVacancy(id) {
+                if (confirm('წავშალოთ?')) {
+                    await supabaseClient.from('vacancies').delete().eq('id', id);
+                    loadAdminData();
+                }
+            }
+
+            if (!isAuthenticated) {
+                return (
+                    <div className="max-w-md mx-auto my-12 p-6 bg-white rounded-2xl border border-slate-200/80 shadow-xl text-center">
+                        <h2 className="text-xl font-extrabold text-slate-900 mb-4">ადმინ პანელი</h2>
+                        <form onSubmit={handleLogin} className="space-y-4">
+                            <input type="password" placeholder="პაროლი" value={pass} onChange={e => setPass(e.target.value)} className="w-full px-4 py-2.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-medium" />
+                            <button type="submit" className="w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold text-xs sm:text-sm">შესვლა</button>
+                        </form>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="max-w-7xl mx-auto px-4 py-8 sm:py-12 w-full">
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">ადმინისტრირება</h1>
+                    <div className="bg-white rounded-2xl border border-slate-200 overflow-x-auto shadow-sm">
+                        <table className="w-full text-left text-xs sm:text-sm min-w-[600px]">
+                            <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold uppercase text-[10px] sm:text-xs">
+                                <tr>
+                                    <th className="p-3 sm:p-4">სათაური</th>
+                                    <th className="p-3 sm:p-4">კომპანია</th>
+                                    <th className="p-3 sm:p-4">ლოკაცია</th>
+                                    <th className="p-3 sm:p-4">სტატუსი</th>
+                                    <th className="p-3 sm:p-4">მოქმედება</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                                {vacancies.map(v => (
+                                    <tr key={v.id}>
+                                        <td className="p-3 sm:p-4 font-bold text-slate-800">{v.title}</td>
+                                        <td className="p-3 sm:p-4 text-slate-600">{v.company_name}</td>
+                                        <td className="p-3 sm:p-4 text-slate-600">{v.location || 'თბილისი'}</td>
+                                        <td className="p-3 sm:p-4">
+                                            <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-bold ${v.is_approved ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                                                {v.is_approved ? 'დადასტურებული' : 'განხილვაში'}
+                                            </span>
+                                        </td>
+                                        <td className="p-3 sm:p-4 flex gap-1.5">
+                                            {!v.is_approved && (
+                                                <button onClick={() => approveVacancy(v.id)} className="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold">დადასტურება</button>
+                                            )}
+                                            <button onClick={() => deleteVacancy(v.id)} className="px-2.5 py-1 bg-rose-600 text-white rounded-lg text-xs font-bold">წაშლა</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        // Main App Component
+        // მარტივი იურიდიული გვერდები — ტექსტი placeholder-ია, შეგიძლიათ შეცვალოთ რეალური შინაარსით
+        function LegalPage({ title, setCurrentPage, children }) {
+            return (
+                <div className="max-w-3xl mx-auto px-4 py-10 sm:py-16 w-full">
+                    <button onClick={() => setCurrentPage('home')} className="mb-6 px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs sm:text-sm transition-colors flex items-center gap-2">
+                        <i className="fa-solid fa-arrow-left"></i> უკან დაბრუნება
+                    </button>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-6">{title}</h1>
+                    <div className="prose max-w-none text-sm sm:text-base text-slate-700 leading-relaxed space-y-4">
+                        {children}
+                    </div>
+                </div>
+            );
+        }
+
+        function TermsPage({ setCurrentPage }) {
+            return (
+                <LegalPage title="წესები და პირობები" setCurrentPage={setCurrentPage}>
+                    <p>ეს გვერდი დროებითი ტექსტია — შეავსეთ Talantebi.ge-ის რეალური მომსახურების პირობებით (მომხმარებლის ვალდებულებები, ვაკანსიების განთავსების წესები, პასუხისმგებლობის შეზღუდვა და ა.შ.).</p>
+                    <p>უკანასკნელი განახლება: 2026</p>
+                </LegalPage>
+            );
+        }
+
+        function PrivacyPolicyPage({ setCurrentPage }) {
+            return (
+                <LegalPage title="კონფიდენციალურობის პოლიტიკა" setCurrentPage={setCurrentPage}>
+                    <p>ეს გვერდი დროებითი ტექსტია — შეავსეთ Talantebi.ge-ის რეალური კონფიდენციალურობის პოლიტიკით (რა მონაცემები გროვდება, როგორ გამოიყენება, მესამე მხარეებთან გაზიარება, cookies და ა.შ.).</p>
+                    <p>უკანასკნელი განახლება: 2026</p>
+                </LegalPage>
+            );
+        }
+
+        function App() {
+            function getInitialPage() {
+                const hash = window.location.hash.slice(1);
+                if (!hash) return 'home';
+                if (hash.startsWith('vacancy/')) return 'job-detail';
+                if (['recruiters', 'talents', 'post-job', 'register-recruiter', 'register-talent', 'admin'].includes(hash)) return hash;
+                return 'home';
+            }
+
+            const [currentPage, setCurrentPage] = useState(getInitialPage());
+            const [selectedJob, setSelectedJob] = useState(null);
+
+            useEffect(() => { window.scrollTo(0, 0); }, [currentPage]);
+
+            useEffect(() => {
+                async function handleHashChange() {
+                    const hash = window.location.hash.slice(1);
+                    if (hash.startsWith('vacancy/')) {
+                        const vacancyId = hash.replace('vacancy/', '');
+                        const { data } = await supabaseClient.from('vacancies').select('*').eq('id', vacancyId).single();
+                        const isExpired = data && data.deadline && new Date(data.deadline) < new Date(new Date().toDateString());
+                        if (data && !isExpired) { setSelectedJob(data); setCurrentPage('job-detail'); }
+                        else setCurrentPage('home');
+                    } else if (['recruiters', 'talents', 'post-job', 'admin', 'terms', 'privacy'].includes(hash)) {
+                        setCurrentPage(hash);
+                    } else {
+                        setCurrentPage('home');
+                    }
+                }
+
+                handleHashChange();
+                window.addEventListener('hashchange', handleHashChange);
+                return () => window.removeEventListener('hashchange', handleHashChange);
+            }, []);
+
+            return (
+                <div className="min-h-screen flex flex-col justify-between w-full overflow-x-hidden">
+                    <div>
+                        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                        {currentPage === 'home' && <HomePage setCurrentPage={setCurrentPage} setSelectedJob={setSelectedJob} />}
+                        {currentPage === 'job-detail' && selectedJob && <JobDetailPage job={selectedJob} setCurrentPage={setCurrentPage} />}
+                        {currentPage === 'recruiters' && <RecruitersPage setCurrentPage={setCurrentPage} />}
+                        {currentPage === 'talents' && <TalentsPage />}
+                        {currentPage === 'post-job' && <PostJobPage />}
+                        {currentPage === 'admin' && <AdminPage />}
+                        {currentPage === 'terms' && <TermsPage setCurrentPage={setCurrentPage} />}
+                        {currentPage === 'privacy' && <PrivacyPolicyPage setCurrentPage={setCurrentPage} />}
+                    </div>
+
+                    {/* Floating Social Widget */}
+                    <aside className="fixed right-4 bottom-4 z-30 flex flex-col gap-2.5">
+                        <FloatingSocialWidget />
+                        <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 bg-white text-slate-700 rounded-full shadow-md border border-slate-200 hover:bg-slate-50 active:scale-95 transition-all">
+                            <i className="fa-solid fa-arrow-up text-xs"></i>
+                        </button>
+                    </aside>
+
+                    {/* Footer */}
+                    <footer className="bg-white border-t border-slate-200/80 mt-12 sm:mt-20 py-8 sm:py-12 w-full">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 text-center md:text-left">
+                            <div>
+                                <span className="text-base sm:text-lg font-extrabold tracking-tight text-slate-900">Talantebi<span className="text-brand-600">.ge</span></span>
+                                <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">ყველა უფლება დაცულია © 2026</p>
+                            </div>
+                            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-slate-600">
+                                <a href="#terms" onClick={(e) => { e.preventDefault(); window.location.hash = 'terms'; setCurrentPage('terms'); }} className="hover:text-brand-600 transition-colors">წესები და პირობები</a>
+                                <a href="#privacy" onClick={(e) => { e.preventDefault(); window.location.hash = 'privacy'; setCurrentPage('privacy'); }} className="hover:text-brand-600 transition-colors">კონფიდენციალურობის პოლიტიკა</a>
+                                <a href="#" className="hover:text-brand-600 transition-colors">კონტაქტი</a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
